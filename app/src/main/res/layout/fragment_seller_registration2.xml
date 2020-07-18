@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/partner_main_linear_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#dfe5f0"
+                        android:text="Seller Registration"
+                        android:textColor="#000" />
+
+                    <com.baoyachi.stepview.HorizontalStepView
+                        android:id="@+id/seller_partner_step_view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Shop Name*"
+                        android:id="@+id/edt_shop_name_seller_registration2"
+                        android:padding="5dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1.2"
+                            android:background="@drawable/edit_text"
+                            android:id="@+id/edt_shop_pincode_seller_registration2"
+                            android:hint="Enter Shop Pincode*"
+                            android:padding="5dp" />
+
+                        <TextView
+                            android:id="@+id/seller_2_txt_choose_location"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:background="@drawable/edit_text"
+                            android:drawableRight="@drawable/ic_location_on_black_24dp"
+                            android:gravity="center"
+                            android:text="@string/location"
+                            android:textColor="#4a91e8" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_text"
+                            android:editable="false"
+                            android:id="@+id/edt_shop_front_image_seller_registration2"
+                            android:hint="Upload Front image of shop*"
+                            android:padding="5dp" />
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"
+                            android:id="@+id/btn_shop_image_seller_registration2"
+                            android:background="@drawable/button"
+                            android:hint="Choose file"
+                            android:padding="10dp"
+                            android:textColorHint="#000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_text"
+                            android:editable="false"
+                            android:id="@+id/edt_shop_inventory_image_seller_registration2"
+                            android:hint="Upload inventior image of shop*"
+                            android:padding="5dp" />
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"
+                            android:id="@+id/btn_shop_inventory_image_seller_registration2"
+                            android:background="@drawable/button"
+                            android:hint="Choose file"
+                            android:padding="10dp"
+                            android:textColorHint="#000" />
+                    </LinearLayout>
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:entries="@array/spn_shop_type"
+                        android:id="@+id/spn_shop_type_seller_registration2"
+                        android:padding="5dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Shop contact number"
+                        android:id="@+id/edt_shop_contact_number_seller_registration2"
+                        android:padding="5dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:id="@+id/edt_shop_email_id_seller_registration2"
+                        android:hint="Enter Shop contact email id"
+                        android:padding="5dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="GST Number"
+                        android:id="@+id/edt_shop_gst_seller_registration2"
+                        android:padding="5dp" />
+
+                    <Button
+                        android:id="@+id/btn_next_seller_registration2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:text="Submit"
+                        android:textColor="#000" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

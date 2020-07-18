@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">TripleAtt</string>
+
+    <string name="access_token">pk.eyJ1IjoiYWRpdHlhZGFsd2FkaTE1MTAiLCJhIjoiY2tiMzRoaXRrMDB5ZzJxbnZidnBqaW55eiJ9.Zz_vnt20S8NQj2SIwTYvIQ</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="myProduct">My Product</string>
+    <string name="myOrder">My Order</string>
+    <string name="myEarning">My Sell</string>
+    <string name="shopProfile">Shop Profile</string>
+    <string name="setting">Setting</string>
+    <string name="myCart">My Cart</string>
+    <string name="myFavourite">My Favourite</string>
+    <string name="myAccount">My Account</string>
+    <string name="notificationSetting">Notification Setting</string>
+    <string name="helpCenter">Help Center</string>
+    <string name="legal">Legal</string>
+    <string name="referEarn"><![CDATA[Refer & Earn]]></string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+
+    <string-array name="spn_product_type">
+        <item>Choose product category?*</item>
+        <item>Grocery</item>
+        <item>Stationary</item>
+        <item>Fast Food</item>
+    </string-array>
+    <string-array name="spn_product_unit">
+        <item>K.G.</item>
+        <item>Liter</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check_out_generate_bill"><![CDATA[Check Out & Generate Bill]]></string>
+
+    <string name="Email"><u>abc@xyz.com</u></string>
+    <string name="location"><u>Choose location*</u></string>
+    <string-array name="spn_vehicle_type">
+        <item>! Which type of vehicle you have?*</item>
+        <item>Bike</item>
+        <item>Activa</item>
+        <item>Tempo</item>
+        <item>Riksha</item>
+        <item>Truck</item>
+    </string-array>
+    <string-array name="spn_shop_type">
+        <item>Choose shop category?*</item>
+        <item>Grocery</item>
+        <item>Stationary</item>
+        <item>Fast Food</item>
+    </string-array>
+    <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+    <string name="openLocationSettings">Open Location Setting</string>
+    <string name="gpsNetworkNotEnabled">GPS Not Active</string>
+    <string name="cancel">Cancel</string>
+</resources>

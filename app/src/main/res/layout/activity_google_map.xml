@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GoogleMap">
+
+<LinearLayout
+    android:id="@+id/linear_edittext"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="4">
+    <SearchView
+        android:id="@+id/edt_search_location_google_map"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text"
+        android:queryHint="Search.."
+        android:padding="5dp"
+        android:iconifiedByDefault="false"/>
+
+</LinearLayout>
+
+
+
+
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linear_edittext" />
+
+    <Button
+        android:id="@+id/google_map_btn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="Done"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/add_address_this_location_google_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="Add Address To this Location"
+        android:textAllCaps="false"
+        android:textSize="10dp"
+        android:visibility="gone" />
+</RelativeLayout>

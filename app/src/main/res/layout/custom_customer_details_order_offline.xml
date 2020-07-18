@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/edt_customer_name_offline_billing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:layout_margin="5dp"
+        android:hint="Enter Customer Name"
+        android:background="@drawable/edit_text"/>
+    <EditText
+        android:id="@+id/edt_customer_address_offline_billing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:hint="Enter Customer Address"
+        android:lines="5"
+        android:background="@drawable/edit_text"/>
+    <EditText
+        android:id="@+id/edt_customer_mobile_offline_billing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:layout_margin="5dp"
+        android:hint="Enter Customer Mobile"
+        android:background="@drawable/edit_text"/>
+    <CheckBox
+        android:id="@+id/chk_not_customer_details_offline_billing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:layout_margin="5dp"
+        android:text="Do not gave information about customer"/>
+
+</LinearLayout>

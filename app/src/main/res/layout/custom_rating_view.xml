@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/txt_name_custom_rate_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <RatingBar
+        android:id="@+id/rate_bar_custom_rate_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5" />
+
+    <EditText
+        android:id="@+id/edt_rate_comment_custom_rate_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text"
+        android:hint="Enter Comments"
+        android:lines="2"
+        android:padding="7dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/button"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:text="submit"
+        android:textAllCaps="false"
+        android:id="@+id/btn_rate_submit_custom_rate_view"/>
+</LinearLayout>

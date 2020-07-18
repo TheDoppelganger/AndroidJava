@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="2dp"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="6.3">
+
+
+        <TextView
+            android:id="@+id/txt_product_id_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sl"
+
+            android:textSize="10dp" />
+
+
+        <TextView
+            android:id="@+id/txt_product_name_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Product\nName"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/txt_stock_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Stovk"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/txt_product_dis_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Category"
+            android:textColor="#000"
+            android:textSize="8dp" />
+
+        <TextView
+
+            android:id="@+id/txt_mrp_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="MRP"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/txt_price_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Price"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/img_drop_down_custom_published_product_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:paddingTop="5dp"
+            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray" />
+</LinearLayout>

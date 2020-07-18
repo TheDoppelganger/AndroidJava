@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/addOnMenu"
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/online_offfline_shop_status"
+                android:title="Shop Status"
+                app:actionLayout="@layout/custom_menu_online_offline" />
+            <item
+                android:id="@+id/menu_after_log_dashboard"
+                android:title="@string/dashboard" />
+            <item
+                android:id="@+id/menu_after_log_myproduct"
+                android:title="@string/myProduct" />
+            <item
+                android:id="@+id/menu_after_log_myorder"
+                android:title="@string/myOrder" />
+            <item
+                android:id="@+id/menu_after_log_myearning"
+                android:title="@string/myEarning" />
+            <item
+                android:id="@+id/menu_after_log_shopprofile"
+                android:title="@string/shopProfile" />
+            <item
+                android:id="@+id/menu_after_log_setting"
+                android:title="@string/setting" />
+            <item
+                android:id="@+id/menu_after_log_offline_billing"
+                android:title="Offline Billing" />
+
+        </menu>
+    </item>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/menu_after_log_mycart"
+                android:title="@string/myCart" />
+            <item
+                android:id="@+id/menu_after_log_myfavourite"
+                android:title="@string/myFavourite" />
+        </menu>
+    </item>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/menu_after_log_Helpcenter"
+                android:title="@string/helpCenter" />
+
+            <item
+                android:id="@+id/menu_after_log_referearn"
+                android:title="@string/referEarn" />
+            <item
+                android:id="@+id/menu_after_log_log_out"
+                android:title="Log Out" />
+        </menu>
+    </item>
+
+
+    <group>
+
+
+    </group>
+</menu>

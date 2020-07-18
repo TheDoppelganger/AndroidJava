@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+            <item
+                android:id="@+id/customer_menu_after_log_mycart"
+                android:title="@string/myCart" />
+            <item
+                android:id="@+id/customer_menu_after_log_myfavourite"
+                android:title="@string/myFavourite" />
+            <item
+                android:id="@+id/customer_menu_after_log_myaccount"
+                android:title="@string/myAccount" />
+            <item
+                android:id="@+id/customer_menu_after_order_history"
+                android:title="Order History"/>
+            <item
+                android:id="@+id/customer_menu_after_log_referearn"
+                android:title="@string/referEarn" />
+            <item
+                android:id="@+id/customer_menu_after_log_suggest_earn"
+                android:title="Suggest Earn" />
+            <item
+                android:id="@+id/customer_menu_after_log_job_for_jobless"
+                android:title="Job For Jobless" />
+
+            <item
+                android:id="@+id/customer_menu_after_log_Helpcenter"
+                android:title="@string/helpCenter" />
+
+            <item
+                android:id="@+id/customer_menu_after_log_out"
+                android:title="Log Out" />
+
+
+</menu>

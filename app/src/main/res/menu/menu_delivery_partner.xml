@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <item
+                android:id="@+id/menu_delivery_partner_online_offline"
+                android:title="Work Status"
+                app:actionLayout="@layout/custom_menu_online_offline" />
+            <item
+                android:id="@+id/show_secure"
+                android:title="Auto Accepted"
+                app:actionLayout="@layout/custom_menu_auto_accepted_on_off" />
+            <item
+                android:id="@+id/menu_delivery_partner_dashboard"
+                android:title="@string/dashboard" />
+            <item
+                android:id="@+id/menu_delivery_partner_my_task"
+                android:title="My Task" />
+
+            <item
+                android:id="@+id/menu_delivery_partner_my_earning"
+                android:title="My Earnings" />
+
+            <item
+                android:id="@+id/menu_delivery_partner_my_profile"
+                android:title="My Profile" />
+            <item
+                android:id="@+id/menu_delivery_partner_setting"
+                android:title="Setting" />
+
+
+            <item
+                android:id="@+id/menu_delivery_partner_Helpcenter"
+                android:title="@string/helpCenter" />
+            <item
+                android:id="@+id/menu_delivery_partner_job_for_jobless"
+                android:title="Job For Jobless" />
+            <item
+                android:id="@+id/menu_after_log_referearn"
+                android:title="@string/referEarn" />
+            <item
+                android:id="@+id/menu_delivery_partner_log_out"
+                android:title="Log out" />
+
+
+</menu>

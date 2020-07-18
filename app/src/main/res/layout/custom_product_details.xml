@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Product Details"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/edt_product_name_custom_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text"
+        android:hint="Product Name"
+        android:padding="5dp" />
+
+    <EditText
+        android:id="@+id/edt_product_barcode_custom_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text"
+        android:hint="Product Barcode"
+        android:padding="5dp" />
+
+    <ImageView
+        android:id="@+id/img_product_custom_product_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/btn_change_image_custom_product_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Change Image"
+        android:textAllCaps="false" />
+
+    <EditText
+        android:id="@+id/edt_product_short_description_custom_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text"
+        android:hint="Product Short Description"
+        android:padding="5dp" />
+
+    <EditText
+        android:id="@+id/edt_product_description_custom_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text"
+        android:hint="Description"
+        android:lines="5"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/btn_change_product_custom_product_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:text="Change Details"
+        android:textAllCaps="false"
+        android:textColor="#000" />
+</LinearLayout>

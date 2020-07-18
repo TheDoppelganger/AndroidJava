@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/reg_main_linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/reg_main_btn_seller_partner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_gravity="end"
+                            android:padding="5dp"
+                            android:text="Get Your shop to Online"
+                            android:textAllCaps="false"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/reg_main_btn_delivery_partner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_gravity="end"
+                            android:padding="5dp"
+                            android:text="Your Career as Delievery partner"
+                            android:textAllCaps="false"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#dfe5f0"
+                        android:text="Customer Registration"
+                        android:textColor="#000" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_aadhar_card_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_have_aadhar_customer_register"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="I have Aadhar Card" />
+
+                        <RadioButton
+                            android:id="@+id/rb_not_aadhar_customer_register"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:text="I don't Have adharCard" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/linear_aadhar_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text"
+                        android:orientation="horizontal"
+                        android:weightSum="9">
+
+                        <EditText
+                            android:id="@+id/edt_aadhar_card_number_customer_register"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="8"
+                            android:background="@android:color/transparent"
+                            android:hint="Enter Aadhar Card Number*"
+                            android:inputType="number"
+                            android:padding="10dp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/qr_scan" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edt_name_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Your Name*"
+                        android:padding="5dp" />
+
+                    <EditText
+                        android:id="@+id/edt_full_address_customer_registration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Full Address"
+                        android:lines="3"
+                        android:padding="5dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1.2"
+                            android:background="@drawable/edit_text"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <EditText
+                                android:id="@+id/edt_address_customer_register"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="3"
+                                android:background="@android:color/transparent"
+                                android:hint="Enter City &amp; State"
+                                android:lines="2"
+                                android:padding="5dp" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="10dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/find_me"
+                                android:scaleType="fitXY" />
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/edt_pincode_customer_register"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="0.8"
+                            android:background="@drawable/edit_text"
+                            android:hint="Pincode"
+                            android:padding="5dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edt_phone_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Mobile Number*"
+                        android:padding="5dp" />
+
+                    <EditText
+                        android:id="@+id/edt_email_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Email Id"
+                        android:padding="5dp" />
+
+                    <EditText
+                        android:id="@+id/edt_password_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Enter Password*"
+                        android:padding="5dp"
+                        android:password="true" />
+
+                    <EditText
+                        android:id="@+id/edt_confirm_password_customer_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text"
+                        android:hint="Confirm Password*"
+                        android:padding="5dp"
+                        android:password="true" />
+
+                    <Button
+                        android:id="@+id/btn_register_customer_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:text="Register"
+                        android:textColor="#fff" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
