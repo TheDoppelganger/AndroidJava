@@ -176,20 +176,20 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 startActivity(new Intent(SellerActivity.this, LogIn.class));
                 break;
             case R.id.menu_after_log_myproduct:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerAllProduct()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerAllProduct()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
 
             case R.id.menu_after_log_myorder:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerNewOrder()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerNewOrder()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_offline_billing:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_myearning:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerMyEarning()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerMyEarning()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.online_offfline_shop_status:
@@ -206,7 +206,7 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 }
                 break;
             case R.id.menu_after_log_shopprofile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerProfile()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerProfile()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
