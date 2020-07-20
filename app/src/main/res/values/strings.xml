@@ -52,4 +52,6 @@
     <string name="openLocationSettings">Open Location Setting</string>
     <string name="gpsNetworkNotEnabled">GPS Not Active</string>
     <string name="cancel">Cancel</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_text">Don\'t have an account? <font fgcolor='#0190ff'>Signup</font></string>
 </resources>

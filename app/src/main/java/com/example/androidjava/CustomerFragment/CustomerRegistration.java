@@ -98,13 +98,13 @@ public class CustomerRegistration extends Fragment implements LocationListener {
         btnDeliveryPartner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DriverRegistration1()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DriverRegistration1()).addToBackStack(null).commit();
             }
         });
         btnSeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new SellerRegistration1()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new SellerRegistration1()).addToBackStack(null).commit();
             }
         });
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)

@@ -81,7 +81,7 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LogIn.this, MainActivity.class));
-                finish();
+
             }
         });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
