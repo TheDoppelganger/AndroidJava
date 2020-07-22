@@ -41,7 +41,7 @@ public class LogIn extends AppCompatActivity {
         String s = sharedPreferences.getString("user", "");
         String s1 = sharedPreferences.getString("seller", "");
         String s2 = sharedPreferences.getString("driver", "");
-        /*if (!s1.equals("")) {
+        if (!s1.equals("")) {
             Gson gson = new Gson();
             mUser user = gson.fromJson(s, mUser.class);
             if (user.getUser_type().equals("Seller")) {
@@ -63,7 +63,7 @@ public class LogIn extends AppCompatActivity {
             if (user.getUser_type().equals("Customer")) {
                 startActivity(new Intent(LogIn.this, CustomerActivity.class));
             }
-        }*/
+        }
     }
 
     @Override
