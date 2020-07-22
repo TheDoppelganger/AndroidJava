@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -50,7 +53,12 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         editor = sharedPreferences.edit();
 
         mtoolbar = findViewById(R.id.toolbar);
+
+
+
         setSupportActionBar(mtoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         drawerLayout = findViewById(R.id.main_drawer_customer);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
@@ -61,53 +69,54 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         String user = sharedPreferences.getString("user", null);
         muser = gson.fromJson(user, mUser.class);
 
-
-        ImageView imageView = findViewById(R.id.open_drawer);
-        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
+//
+//        ImageView imageView = findViewById(R.id.open_drawer);
+//        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
 
         NavigationView navigationView = findViewById(R.id.main_nav_view_customer);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
 
-        imgViewCart = findViewById(R.id.cart_customer_tool_bar);
-        imgChangeLocation=findViewById(R.id.location_customer_tool_bar);
 
-        imgChangeLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
-                    Intent io=new Intent(CustomerActivity.this,GoogleMap.class);
-                    String shop=sharedPreferences.getString("allShop","123");
-                    io.putExtra("Activity",shop);
-                    startActivity(io);
-                }
-            }
-        });
+//        imgViewCart = findViewById(R.id.cart_customer_tool_bar);
+//        imgChangeLocation=findViewById(R.id.location_customer_tool_bar);
+//
+//        imgChangeLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+//                    Intent io=new Intent(CustomerActivity.this,GoogleMap.class);
+//                    String shop=sharedPreferences.getString("allShop","123");
+//                    io.putExtra("Activity",shop);
+//                    startActivity(io);
+//                }
+//            }
+//        });
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
 
-        imageViewFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).addToBackStack(null).commit();
-                }
-            }
-        });
+//        imageViewFav.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).addToBackStack(null).commit();
+//                }
+//            }
+//        });
 
-        imgViewCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
-                }
-            }
-        });
+//        imgViewCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
+//                }
+//            }
+//        });
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -161,6 +170,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         }
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -203,17 +213,58 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         return false;
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+        Log.d("TAG", "onCreateOptionsMenu: working");
+        return true;
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
+
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case R.id.location_customer_toolbar:
+                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+                    Intent io=new Intent(CustomerActivity.this,GoogleMap.class);
+                    String shop=sharedPreferences.getString("allShop","123");
+                    io.putExtra("Activity",shop);
+                    startActivity(io);
+                }
+                return true;
+
+            case R.id.fav:
+                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).addToBackStack(null).commit();
+                }
+                return true;
+
+            case R.id.cart:
+                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
+                }
+                return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode,permissions,grantResults);
     }
+
+
     private void checkDriverToCustomer() {
         String user=gson.toJson(muser);
         editor.putString("user",user);

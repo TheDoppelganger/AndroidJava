@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/location_customer_toolbar"
+        android:icon="@drawable/ic_place_icon"
+        app:showAsAction="always"
+        android:title="Location">
+    </item>
+
+    <item
+        android:id="@+id/fav"
+        android:icon="@drawable/ic_favorite_icon"
+        app:showAsAction="always"
+        android:title="Favourite">
+    </item>
+
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:title="Search"/>
+
+    <item
+        android:id="@+id/wallet"
+        android:icon="@drawable/ic_wallet"
+        app:showAsAction="always"
+        android:title="Wallet">
+    </item>
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_baseline_notifications_none_24"
+        app:showAsAction="always"
+        android:title="Notification">
+    </item>
+
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        app:showAsAction="always"
+        android:title="Cart">
+    </item>
+
+
+</menu>

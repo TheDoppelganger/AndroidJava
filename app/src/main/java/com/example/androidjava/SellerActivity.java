@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -59,6 +62,9 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         editor = sharedPreferences.edit();
         mtoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         gson = new Gson();
         String seller1 = sharedPreferences.getString("seller", "");
         seller = gson.fromJson(seller1, mSeller.class);
@@ -69,17 +75,17 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        ImageView imageView = findViewById(R.id.open_drawer);
-        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
+//        ImageView imageView = findViewById(R.id.open_drawer);
+//        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
         NavigationView navigationView = findViewById(R.id.main_nav_view_seller);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
         navigationView.setNavigationItemSelectedListener(this);
         toggleOpenClose = navigationView.getMenu().findItem(R.id.online_offfline_shop_status).getActionView().findViewById(R.id.toggle_menu_online_offline);
         toggleOpenClose.setTextOn("Open");
@@ -213,6 +219,14 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         return false;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+        Log.d("TAG", "onCreateOptionsMenu: working");
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

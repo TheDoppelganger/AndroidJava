@@ -74,7 +74,7 @@ public class CustomerMyCart extends Fragment implements AddRemoveFunction {
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                getFragmentManager().popBackStack();
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -82,7 +82,9 @@ public class CustomerMyCart extends Fragment implements AddRemoveFunction {
 
                             }
                         }).show();
-                    }
+                    }else
+                        getFragmentManager().popBackStack();
+
                     return true;
                 }
                 return false;
