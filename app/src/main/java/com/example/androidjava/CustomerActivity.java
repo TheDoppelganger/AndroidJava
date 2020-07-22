@@ -74,7 +74,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
         imgViewCart = findViewById(R.id.cart_customer_tool_bar);
         imgChangeLocation=findViewById(R.id.location_customer_tool_bar);
-        /*imgChangeLocation.setOnClickListener(new View.OnClickListener() {
+        imgChangeLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
@@ -84,8 +84,8 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
                     startActivity(io);
                 }
             }
-        });*/
-/*        imageView.setOnClickListener(new View.OnClickListener() {
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -107,7 +107,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
                 }
             }
         });
- */       navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
         checkDriverToCustomer();
         if (muser.getUser_type().equals("Driver")) {
             btnSwitchToCustoemer.setVisibility(View.VISIBLE);
