@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:minHeight="?attr/actionBarSize"
-    app:menu="@menu/menu_main"
+    android:minHeight="25dp"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    android:visibility="gone">
+    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:padding="5dp"
-        android:weightSum="11"
-        android:visibility="gone"
-        >
+        android:weightSum="11">
 
         <ImageView
             android:id="@+id/open_drawer"
@@ -68,6 +64,4 @@
             android:layout_weight="1"
             android:src="@drawable/outline_local_mall_24" />
     </LinearLayout>
-
-
 </androidx.appcompat.widget.Toolbar>
