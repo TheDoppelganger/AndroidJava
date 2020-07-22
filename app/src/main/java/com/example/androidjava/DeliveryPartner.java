@@ -9,9 +9,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -89,9 +86,6 @@ public class DeliveryPartner extends AppCompatActivity implements NavigationView
         instance = this;
         mtoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         gson = new Gson();
         drawerLayout = findViewById(R.id.main_drawer_deliver_partner);
         sharedPreferences = getSharedPreferences("Database", MODE_PRIVATE);
@@ -104,7 +98,7 @@ public class DeliveryPartner extends AppCompatActivity implements NavigationView
         toggle.syncState();
         String user = sharedPreferences.getString("user", null);
         muser = gson.fromJson(user, mUser.class);
-//        ImageView imageView = findViewById(R.id.open_drawer);
+        ImageView imageView = findViewById(R.id.open_drawer);
         NavigationView navigationView = findViewById(R.id.main_nav_view_deliver_partner);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
@@ -113,15 +107,15 @@ public class DeliveryPartner extends AppCompatActivity implements NavigationView
         txtKnowMoreRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverKnowMoreRating()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverKnowMoreRating()).commit();
             }
         });
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                drawerLayout.openDrawer(GravityCompat.START);
-//            }
-//        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
         navigationView.setNavigationItemSelectedListener(this);
         toggleOnlineOffline = navigationView.getMenu().findItem(R.id.menu_delivery_partner_online_offline).getActionView().findViewById(R.id.toggle_menu_online_offline);
         aSwitch = navigationView.getMenu().findItem(R.id.show_secure).getActionView().findViewById(R.id.drawer_switch_auto_accepted);
@@ -257,24 +251,23 @@ public class DeliveryPartner extends AppCompatActivity implements NavigationView
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_delivery_partner_dashboard:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverDashboard()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverDashboard()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_delivery_partner_my_task:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverMyTask()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverMyTask()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_delivery_partner_my_earning:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverEarning()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverEarning()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_delivery_partner_my_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverProfile()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new DriverProfile()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_delivery_partner_log_out:
-                editor.remove("driver");
-                editor.remove("user");
+                editor.clear();
                 editor.commit();
                 startActivity(new Intent(DeliveryPartner.this, LogIn.class));
                 break;
@@ -305,7 +298,7 @@ public class DeliveryPartner extends AppCompatActivity implements NavigationView
                 }
                 break;
             case R.id.menu_delivery_partner_job_for_jobless:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new CustomerJobForJobless()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new CustomerJobForJobless()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_delivery_partner_setting:
@@ -313,20 +306,11 @@ public class DeliveryPartner extends AppCompatActivity implements NavigationView
                 drawerLayout.closeDrawer(GravityCompat.START);*/
                 break;
             case R.id.menu_delivery_partner_Helpcenter:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new CommonHelpCenter()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_delivery_partner, new CommonHelpCenter()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
         return false;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-
-        inflater.inflate(R.menu.menu_main, menu);
-        Log.d("TAG", "onCreateOptionsMenu: working");
-        return true;
     }
 
     @Override

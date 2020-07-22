@@ -35,6 +35,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class CustomerOrderHistory extends Fragment {
     private RecyclerView recycleOrderHistory;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     private List<mOrderCustomerOnline> mainList;
 
     @Override
@@ -42,6 +43,7 @@ public class CustomerOrderHistory extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_customer_order_history, container, false);
         findViewById(view);
+        SetRecycleView();
         return view;
     }
 
@@ -51,7 +53,7 @@ public class CustomerOrderHistory extends Fragment {
         recycleOrderHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
         sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("Database", MODE_PRIVATE);
         mainList = new ArrayList<>();
-        new GetOrderHistoryUser().execute();
+        editor=sharedPreferences.edit();
     }
 
     class GetOrderHistoryUser extends AsyncTask<Void, Void, String> {
@@ -72,18 +74,28 @@ public class CustomerOrderHistory extends Fragment {
             if (s.equals("") || s.startsWith("Error1:")) {
                 Toast.makeText(getActivity(), "Do not get any Response From database\nTry Again After Some Time" + s, Toast.LENGTH_LONG).show();
             } else {
-                try {
-                    JSONArray jsonArray = new JSONArray(s);
-                    Gson gson = new Gson();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        mOrderCustomerOnline orderCustomerOnline = gson.fromJson(jsonArray.getString(i), mOrderCustomerOnline.class);
-                        mainList.add(orderCustomerOnline);
-                    }
-                    CustomerOrderAdapter customerOrderAdapter = new CustomerOrderAdapter(getActivity(), mainList);
-                    recycleOrderHistory.setAdapter(customerOrderAdapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                editor.putString("orderHistory",s);
+                editor.commit();
+                SetRecycleView();
+            }
+        }
+    }
+    private void SetRecycleView(){
+        String orderHistory=sharedPreferences.getString("orderHistory","");
+        if(orderHistory.equals("")){
+            new GetOrderHistoryUser().execute();
+        }else{
+            try {
+                JSONArray jsonArray = new JSONArray(orderHistory);
+                Gson gson = new Gson();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    mOrderCustomerOnline orderCustomerOnline = gson.fromJson(jsonArray.getString(i), mOrderCustomerOnline.class);
+                    mainList.add(orderCustomerOnline);
                 }
+                CustomerOrderAdapter customerOrderAdapter = new CustomerOrderAdapter(getActivity(), mainList);
+                recycleOrderHistory.setAdapter(customerOrderAdapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
