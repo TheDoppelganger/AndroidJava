@@ -48,7 +48,17 @@
                 android:drawableRight="@drawable/barcode"
                 android:hint="Enter the barcode"
                 android:padding="5dp" />
-
+            <EditText
+                android:id="@+id/edt_stock_add_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edit_text"
+                android:drawableRight="@drawable/barcode"
+                android:hint="Enter opening stock"
+                android:padding="5dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,29 +198,50 @@
 
                 </RadioGroup>
             </LinearLayout>
-
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text"
+                android:padding="5dp"
+                android:hint="Enter Variant/Size Name"/>
             <LinearLayout
                 android:id="@+id/linear_unit_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Choose Unit"
-                    android:textColor="#000" />
-
-                <Spinner
-                    android:id="@+id/spn_unit_price_add_product"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:weightSum="5">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:textAllCaps="false"
+                    android:text="K.G."/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button1"
+                    android:textAllCaps="false"
+                    android:text="Liter"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button1"
+                    android:textAllCaps="false"
+                    android:text="Other"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:background="@drawable/edit_text"
-                    android:entries="@array/spn_product_unit"
-                    android:gravity="center"
-                    android:padding="5dp" />
+                    android:padding="3dp"
+                    android:hint="Type Unit"/>
             </LinearLayout>
 
             <LinearLayout

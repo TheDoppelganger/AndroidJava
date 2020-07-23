@@ -55,10 +55,10 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImage;
 
 public class AddProduct extends Fragment {
-    private Button btnRequest;
+    private Button btnRequest,btnKgVarient,btnLiterVariant,btnOtherVariant;
     private ImageView btnAddImage, imgAddImageToCamera;
     private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription;
-    private Spinner spnProductCategory, spnProductUnit;
+    private Spinner spnProductCategory;
     private RadioButton rbPacked, rbLoose, rbVariantYes, rbVariantNo, rbReturnable, rbReturnableNot;
     private TextView txtChooseImage;
     private Bitmap bitmap;
@@ -68,7 +68,7 @@ public class AddProduct extends Fragment {
     private LinearLayout linearCategory, linearVarient;
     private ImageView imgVarient;
     private List<mVarient> listVarient;
-    private String proudctPacked, strRurnable = "Yes";
+    private String proudctPacked, strRurnable = "Yes",strProductunit="";
     private int CAMERA_REQUEST = 200;
 
     @Override
@@ -263,7 +263,7 @@ public class AddProduct extends Fragment {
         edtShortDescription = view.findViewById(R.id.edt_short_description_add_product);
         edtDescription = view.findViewById(R.id.edt_description_add_product);
         btnAddImage = view.findViewById(R.id.btn_select_image_add_product);
-        spnProductUnit = view.findViewById(R.id.spn_unit_price_add_product);
+
         rbVariantYes = view.findViewById(R.id.rb_variant_yes_add_product);
         rbVariantNo = view.findViewById(R.id.rb_variant_not_add_product);
         linearCategory = view.findViewById(R.id.linear_unit_add_product);
@@ -301,7 +301,7 @@ public class AddProduct extends Fragment {
             list.add(new BasicNameValuePair("ProductPackage", proudctPacked));
             list.add(new BasicNameValuePair("ProductShortDescription", edtShortDescription.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductDescription", edtDescription.getText().toString().trim()));
-            list.add(new BasicNameValuePair("ProductUnit", spnProductUnit.getSelectedItem().toString().trim()));
+            list.add(new BasicNameValuePair("ProductUnit", strProductunit));
             list.add(new BasicNameValuePair("ProductMrp", edtMrp.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductPrice", edtPrice.getText().toString().trim()));
             if (listVarient.size() >= 1) {
@@ -312,6 +312,7 @@ public class AddProduct extends Fragment {
                     list.add(new BasicNameValuePair("ProductVariantMrp" + i, varient.getProductMrp()));
                     list.add(new BasicNameValuePair("ProductVariantPrice" + i, varient.getProductPrice()));
                     list.add(new BasicNameValuePair("ProductPacked" + i, varient.getProudctPacked()));
+
                 }
                 list.add(new BasicNameValuePair("ProductVariant", "Yes"));
             } else {
