@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text"
         android:hint="Enter Varient Name"
-
         android:padding="5dp" />
     <EditText
         android:id="@+id/edt_variant_barcode_custom_add_product"
@@ -44,7 +43,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="5dp"
-        android:weightSum="5">
+        android:weightSum="5"
+        android:visibility="gone">
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"

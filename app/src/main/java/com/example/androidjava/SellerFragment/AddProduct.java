@@ -22,7 +22,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,9 +57,9 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImage;
 
 public class AddProduct extends Fragment {
-    private Button btnRequest,btnKgVarient,btnLiterVariant,btnOtherVariant;
+    private Button btnRequest, btnKgVarient, btnLiterVariant, btnOtherVariant;
     private ImageView btnAddImage, imgAddImageToCamera;
-    private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription;
+    private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit;
     private Spinner spnProductCategory;
     private RadioButton rbPacked, rbLoose, rbVariantYes, rbVariantNo, rbReturnable, rbReturnableNot;
     private TextView txtChooseImage;
@@ -68,9 +70,10 @@ public class AddProduct extends Fragment {
     private LinearLayout linearCategory, linearVarient;
     private ImageView imgVarient;
     private List<mVarient> listVarient;
-    private String proudctPacked, strRurnable = "Yes",strProductunit="";
+    private String proudctPacked, strRurnable = "Yes", strProductunit = "K.G.";
     private int CAMERA_REQUEST = 200;
-
+    private Switch switchFoodItemOrNot;
+    private RadioGroup rgFoodItemYes;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -166,6 +169,44 @@ public class AddProduct extends Fragment {
                 }
             }
         });
+        btnKgVarient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnKgVarient.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button));
+                btnLiterVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnOtherVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                edtOtherUnit.setVisibility(View.GONE);
+                strProductunit="K.G.";
+            }
+        });
+        btnLiterVariant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnKgVarient.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnLiterVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button));
+                btnOtherVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                edtOtherUnit.setVisibility(View.GONE);
+                strProductunit="Liter";
+            }
+        });
+        btnOtherVariant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnKgVarient.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnLiterVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnOtherVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button));
+                edtOtherUnit.setVisibility(View.VISIBLE);
+                strProductunit="Other";
+            }
+        });
+        switchFoodItemOrNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                rgFoodItemYes.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         return view;
     }
 
@@ -197,7 +238,6 @@ public class AddProduct extends Fragment {
             File file = new File(uri.getPath());
             txtChooseImage.setText(file.getName());
         } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
-
             bitmap = (Bitmap) data.getExtras().get("data");
             strProductImage = getStringImage(bitmap);
             txtChooseImage.setText("Camera Image:1");
@@ -239,8 +279,8 @@ public class AddProduct extends Fragment {
 
             }
         }
-        if(rbPacked.isChecked()){
-            if(edtMrp.getText().toString().trim().isEmpty()){
+        if (rbPacked.isChecked()) {
+            if (edtMrp.getText().toString().trim().isEmpty()) {
                 Toast.makeText(getActivity(), "Enter  mrp Data Properly", Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -263,7 +303,9 @@ public class AddProduct extends Fragment {
         edtShortDescription = view.findViewById(R.id.edt_short_description_add_product);
         edtDescription = view.findViewById(R.id.edt_description_add_product);
         btnAddImage = view.findViewById(R.id.btn_select_image_add_product);
-
+        btnKgVarient = view.findViewById(R.id.btn_unit_kg_add_product);
+        btnLiterVariant = view.findViewById(R.id.btn_unit_liter_add_product);
+        btnOtherVariant = view.findViewById(R.id.btn_unit_other_add_product);
         rbVariantYes = view.findViewById(R.id.rb_variant_yes_add_product);
         rbVariantNo = view.findViewById(R.id.rb_variant_not_add_product);
         linearCategory = view.findViewById(R.id.linear_unit_add_product);
@@ -278,6 +320,9 @@ public class AddProduct extends Fragment {
         rbReturnable = view.findViewById(R.id.rb_returnable_yes_add_product);
         rbReturnableNot = view.findViewById(R.id.rb_returnable_no_add_product);
         imgAddImageToCamera = view.findViewById(R.id.btn_select_image_camera_add_product);
+        edtOtherUnit=view.findViewById(R.id.edt_unit_other_add_product);
+        switchFoodItemOrNot=view.findViewById(R.id.switch_food_item_or_not_add_product);
+        rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
     }
 
     private class AddProductDatabase extends AsyncTask<Void, Void, String> {
@@ -301,6 +346,9 @@ public class AddProduct extends Fragment {
             list.add(new BasicNameValuePair("ProductPackage", proudctPacked));
             list.add(new BasicNameValuePair("ProductShortDescription", edtShortDescription.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductDescription", edtDescription.getText().toString().trim()));
+            if(strProductunit.equals("Other")){
+                strProductunit=edtOtherUnit.getText().toString().trim();
+            }
             list.add(new BasicNameValuePair("ProductUnit", strProductunit));
             list.add(new BasicNameValuePair("ProductMrp", edtMrp.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductPrice", edtPrice.getText().toString().trim()));
@@ -312,7 +360,6 @@ public class AddProduct extends Fragment {
                     list.add(new BasicNameValuePair("ProductVariantMrp" + i, varient.getProductMrp()));
                     list.add(new BasicNameValuePair("ProductVariantPrice" + i, varient.getProductPrice()));
                     list.add(new BasicNameValuePair("ProductPacked" + i, varient.getProudctPacked()));
-
                 }
                 list.add(new BasicNameValuePair("ProductVariant", "Yes"));
             } else {

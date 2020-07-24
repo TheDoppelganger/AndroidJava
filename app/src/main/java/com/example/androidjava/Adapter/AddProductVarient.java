@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
@@ -98,10 +99,10 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                     varient.setProudctPacked("Packed");
                 } else {
                     varient.setProudctPacked("Loose");
+                    holder.linearUnitChoose.setVisibility(View.VISIBLE);
                 }
             }
         });
-
 
     }
 
@@ -113,14 +114,14 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
     class AddProductVarientViewHolde extends RecyclerView.ViewHolder {
         EditText edtVarientName, edtMrp, edtPrice;
         RadioButton rbPacked;
-
+        LinearLayout linearUnitChoose;
         public AddProductVarientViewHolde(@NonNull View itemView) {
             super(itemView);
             edtVarientName = itemView.findViewById(R.id.edt_variant_name_custom_add_product);
             edtMrp = itemView.findViewById(R.id.edt_variant_mrp_custom_add_product);
             edtPrice = itemView.findViewById(R.id.edt_variant_price_custom_add_product);
             rbPacked = itemView.findViewById(R.id.rb_variant_packed_custom_add_product);
-
+            linearUnitChoose=itemView.findViewById(R.id.linear_unit_add_product);
 
         }
     }
