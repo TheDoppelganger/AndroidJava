@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -22,6 +23,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.androidjava.CustomerFragment.CustomerJobForJobless;
+import com.example.androidjava.CustomerFragment.CustomerMyBills;
 import com.example.androidjava.CustomerFragment.CustomerMyCart;
 import com.example.androidjava.CustomerFragment.CustomerMyFavourite;
 import com.example.androidjava.CustomerFragment.CustomerOrderHistory;
@@ -41,6 +43,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ImageView imgViewCart,imgChangeLocation;
+    TextView tvUserName;
     private Gson gson;
     private mUser muser;
     private ToggleButton btnSwitchToCustoemer;
@@ -76,6 +79,9 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.main_nav_view_customer);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
+        tvUserName = headerView.findViewById(R.id.tvUserName);
+
+        tvUserName.setText(muser.getName());
 
 
 //        imgViewCart = findViewById(R.id.cart_customer_tool_bar);
@@ -178,8 +184,14 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new SellerProfileCustomer()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
+
             case R.id.customer_menu_after_log_mycart:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.customer_menu_after_log_mybills:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyBills()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_myfavourite:

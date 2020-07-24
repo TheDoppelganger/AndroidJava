@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -60,7 +61,8 @@ public class CustomerRegistration extends Fragment implements LocationListener {
     private Bundle b;
     private Button btnDeliveryPartner, btnSeller, btnNext;
     private EditText edtAddress, edtAadharCardNumber, edtName, edtPhoneNumber, edtPinCode, edtEmailId, edtPassword, edtCPassword, edtFullAddress;
-    private LinearLayout linearAadharCard;
+//    private LinearLayout relativeAadharCard;
+    private RelativeLayout relativeAadharCard;
     private RadioGroup rgAadharCard;
     private RadioButton rbHaveAadhar, rbNotAadhar;
     private LocationManager locationManager;
@@ -79,9 +81,9 @@ public class CustomerRegistration extends Fragment implements LocationListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rbNotAadhar.isChecked()) {
-                    linearAadharCard.setVisibility(View.GONE);
+                    relativeAadharCard.setVisibility(View.GONE);
                 } else {
-                    linearAadharCard.setVisibility(View.VISIBLE);
+                    relativeAadharCard.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -202,7 +204,7 @@ public class CustomerRegistration extends Fragment implements LocationListener {
         btnDeliveryPartner = view.findViewById(R.id.reg_main_btn_delivery_partner);
         btnSeller = view.findViewById(R.id.reg_main_btn_seller_partner);
         btnNext = view.findViewById(R.id.btn_register_customer_register);
-        linearAadharCard = view.findViewById(R.id.linear_aadhar_customer_register);
+        relativeAadharCard = view.findViewById(R.id.relative_aadhar_customer_register);
         rgAadharCard = view.findViewById(R.id.rg_aadhar_card_customer_register);
         rbHaveAadhar = view.findViewById(R.id.rb_have_aadhar_customer_register);
         rbNotAadhar = view.findViewById(R.id.rb_not_aadhar_customer_register);

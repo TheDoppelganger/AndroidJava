@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="4dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvOrderID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            tools:text="Order ID" />
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1.1dp"
+            android:layout_below="@+id/tvOrderID"
+            android:background="@color/common_google_signin_btn_text_light_disabled" />
+
+
+        <LinearLayout
+            android:id="@+id/linearlayoutOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewLine">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="7">
+
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    tools:text="Product Name, Variant Name" />
+
+                <TextView
+                    android:id="@+id/tvOrderDateAndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvProductName"
+                    android:layout_marginLeft="8dp"
+                    tools:text="Delivered on 21 June, 05:00 PM" />
+
+                <TextView
+                    android:id="@+id/tvReturnDeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvOrderDateAndTime"
+                    android:layout_marginLeft="8dp"
+                    tools:text="10 Days Return Policy Ends on 31 June" />
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imgOrder"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="3"
+                tools:src="@drawable/other_store" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewLine2"
+            android:layout_width="match_parent"
+            android:layout_height="1.1dp"
+            android:layout_below="@+id/linearlayoutOrderDetails"
+            android:background="@color/common_google_signin_btn_text_light_disabled" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewLine2"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style = "?android:attr/ratingBarStyleIndicator"
+                android:numStars = "5"
+                android:rating   = "4"/>
+
+            <TextView
+                android:id="@+id/tvWriteReviews"
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textAlignment="textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Write Reviews"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                tools:ignore="RtlCompat" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

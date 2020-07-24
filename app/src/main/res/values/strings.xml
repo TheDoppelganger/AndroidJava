@@ -54,4 +54,21 @@
     <string name="cancel">Cancel</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="sign_text">Don\'t have an account? <font fgcolor='#0190ff'>Signup</font></string>
+
+
+    <string name="enter_your_name">Enter Your Name<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_your_mobile_number">Enter Your Mobile Number<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_password">Enter Password<font fgcolor='#fc2403'>*</font></string>
+    <string name="re_enter_password">Re enter Password<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_your_driving_license_number"><font fgcolor='#03d3fc'>!!</font>Enter Your Driving License Number<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_your_vehicle_number"><font fgcolor='#03d3fc'>!!!</font>Enter Your Vehicle Number<font fgcolor='#fc2403'>*</font></string>
+    <string name="types_of_vehicle"><font fgcolor='#03d3fc'>!</font>Which types of vehicle you have?<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_your_aadhar_id">Enter Your Aadhar ID<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_shop_name">Enter Shop Name<font fgcolor='#fc2403'>*</font></string>
+    <string name="enter_pincode">Enter PinCode<font fgcolor='#fc2403'>*</font></string>
+    <string name="choose_location"><u>Choose Location*</u></string>
+    <string name="upload_front_image_of_shop">Upload Front image of shop<font fgcolor='#fc2403'>*</font></string>
+    <string name="choose_shop_category">Choose Shop Category<font fgcolor='#fc2403'>*</font></string>
+    <string name="i_have_read_and_agree_with_the_terms_and_conditions">I have read and agree with the <font fgcolor='#4ab1ff'>Terms and Conditions</font></string>
+    <string name="myBills">My Bills</string>
 </resources>

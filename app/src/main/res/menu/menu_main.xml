@@ -15,13 +15,13 @@
         android:title="Favourite">
     </item>
 
-
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:title="Search"/>
+
 
     <item
         android:id="@+id/wallet"
@@ -38,11 +38,13 @@
     </item>
 
     <item
+
         android:id="@+id/cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         app:showAsAction="always"
         android:title="Cart">
     </item>
+
 
 
 </menu>
