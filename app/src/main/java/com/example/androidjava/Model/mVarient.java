@@ -1,7 +1,7 @@
 package com.example.androidjava.Model;
 
 public class mVarient {
-    private String productVarient;
+
     private String productMrp;
     private String productPrice;
     private String proudctPacked;
@@ -12,22 +12,13 @@ public class mVarient {
     public mVarient() {
     }
 
-    public mVarient(String productVarient, String productMrp, String productPrice, String proudctPacked, String productUnit, String productStock, String productBarCode) {
-        this.productVarient = productVarient;
+    public mVarient(String productMrp, String productPrice, String proudctPacked, String productUnit, String productStock, String productBarCode) {
         this.productMrp = productMrp;
         this.productPrice = productPrice;
         this.proudctPacked = proudctPacked;
         this.productUnit = productUnit;
         this.productStock = productStock;
         this.productBarCode = productBarCode;
-    }
-
-    public String getProductVarient() {
-        return productVarient;
-    }
-
-    public void setProductVarient(String productVarient) {
-        this.productVarient = productVarient;
     }
 
     public String getProductMrp() {

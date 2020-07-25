@@ -166,7 +166,7 @@ public class AddProduct extends Fragment {
             @Override
             public void onClick(View v) {
                 if (listVarient.size() < 5) {
-                    mVarient varient = new mVarient("", "", "", "Packed","","","");
+                    mVarient varient = new mVarient("", "", "Packed","","","");
                     listVarient.add(varient);
                     AddProductVarient addProductVarient = new AddProductVarient(listVarient, getActivity());
                     recycleVariant.setAdapter(addProductVarient);
@@ -298,7 +298,6 @@ public class AddProduct extends Fragment {
                 mVarient varient = listVarient.get(i);
                 if (varient.getProductMrp().equals("")
                         || varient.getProductPrice().equals("")
-                        || varient.getProductVarient().equals("")
                         || varient.getProudctPacked().equals("")
                         || varient.getProductBarCode().equals("")
                         || varient.getProductStock().equals("")) {
@@ -388,7 +387,6 @@ public class AddProduct extends Fragment {
                 for (int i = 0; i < listVarient.size(); i++) {
                     mVarient varient = listVarient.get(i);
                     list.add(new BasicNameValuePair("IsVarientAvailable", String.valueOf(i + 1)));
-                    list.add(new BasicNameValuePair("ProductVariant" + i, varient.getProductVarient()));
                     list.add(new BasicNameValuePair("ProductVariantMrp" + i, varient.getProductMrp()));
                     list.add(new BasicNameValuePair("ProductVariantPrice" + i, varient.getProductPrice()));
                     list.add(new BasicNameValuePair("ProductPacked" + i, varient.getProudctPacked()));

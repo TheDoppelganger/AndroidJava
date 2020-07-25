@@ -42,7 +42,6 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
     public void onBindViewHolder(@NonNull final AddProductVarientViewHolde holder, int position) {
         final mVarient varient = listProduct.get(position);
         if (varient.getProductMrp() != null) {
-            holder.edtVarientName.setText(varient.getProductVarient());
             holder.edtMrp.setText(varient.getProductMrp());
             holder.edtPrice.setText(varient.getProductPrice());
         }
@@ -78,22 +77,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                 varient.setProductMrp(holder.edtMrp.getText().toString().trim());
             }
         });
-        holder.edtVarientName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                varient.setProductVarient(holder.edtVarientName.getText().toString().trim());
-            }
-        });
         holder.rbPacked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -191,13 +175,13 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
     }
 
     class AddProductVarientViewHolde extends RecyclerView.ViewHolder {
-        EditText edtVarientName, edtMrp, edtPrice,edtBarCode,edtOtherUnit,edtStock;
+        EditText  edtMrp, edtPrice,edtBarCode,edtOtherUnit,edtStock;
         RadioButton rbPacked;
         LinearLayout linearUnitChoose;
         Button btnKgUnit,btnLiterUnit,btnOtherUnit;
         public AddProductVarientViewHolde(@NonNull View itemView) {
             super(itemView);
-            edtVarientName = itemView.findViewById(R.id.edt_variant_name_custom_add_product);
+
             edtMrp = itemView.findViewById(R.id.edt_variant_mrp_custom_add_product);
             edtPrice = itemView.findViewById(R.id.edt_variant_price_custom_add_product);
             rbPacked = itemView.findViewById(R.id.rb_variant_packed_custom_add_product);

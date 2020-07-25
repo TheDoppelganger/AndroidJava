@@ -3,22 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/edt_variant_name_custom_add_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text"
-        android:hint="Enter Varient Name"
-        android:padding="5dp" />
-    <EditText
-        android:id="@+id/edt_variant_barcode_custom_add_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text"
-        android:hint="Enter Varient Barcode"
-        android:layout_marginTop="10dp"
-        android:padding="5dp" />
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,6 +66,22 @@
             android:hint="Type Unit"
             android:visibility="gone"/>
     </LinearLayout>
+    <EditText
+        android:id="@+id/edt_variant_size_add_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text"
+        android:hint="Enter Variant/Size Name"
+        android:padding="5dp" />
+    <EditText
+        android:id="@+id/edt_variant_barcode_custom_add_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text"
+        android:hint="Enter Varient Barcode"
+        android:layout_marginTop="10dp"
+        android:padding="5dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
