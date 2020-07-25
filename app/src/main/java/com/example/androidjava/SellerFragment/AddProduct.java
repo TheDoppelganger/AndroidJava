@@ -151,11 +151,14 @@ public class AddProduct extends Fragment {
         rbVariantYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (rbVariantYes.isChecked())
+                if (rbVariantYes.isChecked()) {
                     linearVarient.setVisibility(View.VISIBLE);
-                else {
+                    recycleVariant.setVisibility(View.VISIBLE);
+                }
+                else{
                     listVarient.clear();
                     linearVarient.setVisibility(View.GONE);
+                    recycleVariant.setVisibility(View.GONE);
                 }
             }
         });
@@ -207,6 +210,8 @@ public class AddProduct extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                 rgFoodItemYes.setVisibility(View.VISIBLE);
+                }else{
+                    rgFoodItemYes.setVisibility(View.GONE);
                 }
             }
         });

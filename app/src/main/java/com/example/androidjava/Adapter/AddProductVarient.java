@@ -112,6 +112,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                 holder.btnKgUnit.setBackground(ContextCompat.getDrawable(activity,R.drawable.button));
                 holder.btnLiterUnit.setBackground(ContextCompat.getDrawable(activity,R.drawable.button1));
                 holder.btnOtherUnit.setBackground(ContextCompat.getDrawable(activity,R.drawable.button1));
+                holder.edtOtherUnit.setVisibility(View.GONE);
                 varient.setProductUnit("K.G.");
             }
         });
@@ -121,6 +122,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                 holder.btnKgUnit.setBackground(ContextCompat.getDrawable(activity,R.drawable.button1));
                 holder.btnLiterUnit.setBackground(ContextCompat.getDrawable(activity,R.drawable.button));
                 holder.btnOtherUnit.setBackground(ContextCompat.getDrawable(activity,R.drawable.button1));
+                holder.edtOtherUnit.setVisibility(View.GONE);
                 varient.setProductUnit("Liter");
             }
         });
