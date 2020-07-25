@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidjava.Adapter.AddProductVarient;
 import com.example.androidjava.ApiCalling.ApiUrls;
 import com.example.androidjava.DatabaseConnection.JsonParse;
+import com.example.androidjava.DriverFragment.DriverRegistration2;
 import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.Model.mVarient;
 import com.example.androidjava.R;
@@ -59,7 +60,7 @@ import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImag
 public class AddProduct extends Fragment {
     private Button btnRequest, btnKgVarient, btnLiterVariant, btnOtherVariant;
     private ImageView btnAddImage, imgAddImageToCamera;
-    private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit;
+    private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit,edtVariantSize;
     private Spinner spnProductCategory;
     private RadioButton rbPacked, rbLoose, rbVariantYes, rbVariantNo, rbReturnable, rbReturnableNot;
     private TextView txtChooseImage;
@@ -152,15 +153,17 @@ public class AddProduct extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (rbVariantYes.isChecked())
                     linearVarient.setVisibility(View.VISIBLE);
-                else
+                else {
+                    listVarient.clear();
                     linearVarient.setVisibility(View.GONE);
+                }
             }
         });
         imgVarient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listVarient.size() < 5) {
-                    mVarient varient = new mVarient("", "", "", "Packed");
+                    mVarient varient = new mVarient("", "", "", "Packed","","","");
                     listVarient.add(varient);
                     AddProductVarient addProductVarient = new AddProductVarient(listVarient, getActivity());
                     recycleVariant.setAdapter(addProductVarient);
@@ -226,17 +229,37 @@ public class AddProduct extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                String path = null;
+                if (Build.VERSION.SDK_INT < 11)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
 
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                e.printStackTrace();
+                    // SDK >= 11 && SDK < 19
+                else if (Build.VERSION.SDK_INT < 19)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
+
+                    // SDK > 19 (Android 4.4)
+                else
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
+                // Get the file instance
+                File file = new File(path);
+                long size = file.length() / 1024;
+
+                if (size < 400) {
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    strProductImage = getStringImage(bitmap);
+                    String fileName= JsonParse.getFileName(data.getData(),getActivity());
+                    txtChooseImage.setText(fileName);
+                }else{
+                    Toast.makeText(getActivity(), "File size must be less than 400 Kb...", Toast.LENGTH_SHORT).show();
+                }
+
             }
-            strProductImage = getStringImage(bitmap);
-            Uri uri = data.getData();
-            File file = new File(uri.getPath());
-            txtChooseImage.setText(file.getName());
         } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
             strProductImage = getStringImage(bitmap);
@@ -247,7 +270,8 @@ public class AddProduct extends Fragment {
     private boolean checkEmpty() {
         if (edtProductName.getText().toString().trim().isEmpty()
                 || spnProductCategory.getSelectedItem().toString().equals("Choose shop category?*")
-                || edtPrice.getText().toString().trim().isEmpty()) {
+                || edtPrice.getText().toString().trim().isEmpty()
+                || edtVariantSize.getText().toString().trim().isEmpty()) {
             Toast.makeText(getActivity(), "Enter Data Properly", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -270,7 +294,9 @@ public class AddProduct extends Fragment {
                 if (varient.getProductMrp().equals("")
                         || varient.getProductPrice().equals("")
                         || varient.getProductVarient().equals("")
-                        || varient.getProudctPacked().equals("")) {
+                        || varient.getProudctPacked().equals("")
+                        || varient.getProductBarCode().equals("")
+                        || varient.getProductStock().equals("")) {
                     Toast.makeText(getActivity(), "Please Enter Different Varient Properly Of Product", Toast.LENGTH_LONG)
                             .show();
                     return false;
@@ -323,6 +349,7 @@ public class AddProduct extends Fragment {
         edtOtherUnit=view.findViewById(R.id.edt_unit_other_add_product);
         switchFoodItemOrNot=view.findViewById(R.id.switch_food_item_or_not_add_product);
         rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
+        edtVariantSize=view.findViewById(R.id.edt_variant_size_add_product);
     }
 
     private class AddProductDatabase extends AsyncTask<Void, Void, String> {
@@ -360,6 +387,11 @@ public class AddProduct extends Fragment {
                     list.add(new BasicNameValuePair("ProductVariantMrp" + i, varient.getProductMrp()));
                     list.add(new BasicNameValuePair("ProductVariantPrice" + i, varient.getProductPrice()));
                     list.add(new BasicNameValuePair("ProductPacked" + i, varient.getProudctPacked()));
+                    list.add(new BasicNameValuePair("ProductVariantBarcode"+i,varient.getProductBarCode()));
+                    list.add(new BasicNameValuePair("ProductVariantStock"+i,varient.getProductStock()));
+                    if(!varient.getProudctPacked().equals("Packed")){
+                        list.add(new BasicNameValuePair("ProductUnit"+i,varient.getProductUnit()));
+                    }
                 }
                 list.add(new BasicNameValuePair("ProductVariant", "Yes"));
             } else {

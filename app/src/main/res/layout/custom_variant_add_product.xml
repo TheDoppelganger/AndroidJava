@@ -43,9 +43,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="5dp"
-        android:weightSum="5"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:weightSum="5">
         <Button
+            android:id="@+id/btn_variant_kg_unit_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -54,6 +55,7 @@
             android:textAllCaps="false"
             android:text="K.G."/>
         <Button
+            android:id="@+id/btn_variant_liter_unit_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -62,6 +64,7 @@
             android:textAllCaps="false"
             android:text="Liter"/>
         <Button
+            android:id="@+id/btn_variant_other_unit_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -70,12 +73,14 @@
             android:textAllCaps="false"
             android:text="Other"/>
         <EditText
+            android:id="@+id/edt_variant_other_unit_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/edit_text"
             android:padding="3dp"
-            android:hint="Type Unit"/>
+            android:hint="Type Unit"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout
@@ -106,6 +111,7 @@
             android:padding="5dp" />
     </LinearLayout>
     <EditText
+        android:id="@+id/edt_variant_stock_custom_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text"
