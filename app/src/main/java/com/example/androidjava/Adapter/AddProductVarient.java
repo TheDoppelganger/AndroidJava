@@ -39,8 +39,15 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AddProductVarientViewHolde holder, int position) {
+    public void onBindViewHolder(@NonNull final AddProductVarientViewHolde holder, final int position) {
         final mVarient varient = listProduct.get(position);
+        holder.btnCancelVariant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listProduct.remove(position);
+                notifyDataSetChanged();
+            }
+        });
         if (varient.getProductMrp() != null) {
             holder.edtMrp.setText(varient.getProductMrp());
             holder.edtPrice.setText(varient.getProductPrice());
@@ -83,6 +90,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (holder.rbPacked.isChecked()) {
                     varient.setProudctPacked("Packed");
+                    holder.linearUnitChoose.setVisibility(View.GONE);
                 } else {
                     varient.setProudctPacked("Loose");
                     holder.linearUnitChoose.setVisibility(View.VISIBLE);
@@ -135,6 +143,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                 varient.setProductUnit(editable.toString());
             }
         });
+
         holder.edtStock.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -167,6 +176,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                 varient.setProductBarCode(editable.toString());
             }
         });
+
     }
 
     @Override
@@ -178,7 +188,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
         EditText  edtMrp, edtPrice,edtBarCode,edtOtherUnit,edtStock;
         RadioButton rbPacked;
         LinearLayout linearUnitChoose;
-        Button btnKgUnit,btnLiterUnit,btnOtherUnit;
+        Button btnKgUnit,btnLiterUnit,btnOtherUnit,btnCancelVariant;
         public AddProductVarientViewHolde(@NonNull View itemView) {
             super(itemView);
 
@@ -192,6 +202,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
             btnKgUnit =itemView.findViewById(R.id.btn_variant_kg_unit_custom_add_product);
             btnLiterUnit=itemView.findViewById(R.id.btn_variant_liter_unit_custom_add_product);
             btnOtherUnit=itemView.findViewById(R.id.btn_variant_other_unit_custom_add_product);
+            btnCancelVariant=itemView.findViewById(R.id.btn_cancel_varient_custom_add_product);
         }
     }
 

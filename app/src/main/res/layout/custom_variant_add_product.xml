@@ -3,32 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <RadioGroup
+    <Button
+        android:id="@+id/btn_cancel_varient_custom_add_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="5dp"
+        android:background="@drawable/cancel_button"
+        android:text="Cancel Variant"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:padding="5dp"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="2">
 
-        <RadioButton
-            android:id="@+id/rb_variant_packed_custom_add_product"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:checked="true"
-            android:text="Packed" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Loose" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_variant_packed_custom_add_product"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Packed" />
+
+            <RadioButton
+                android:id="@+id/rb_loose_add_product"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Loose" />
+
+        </RadioGroup>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linear_unit_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_margin="5dp"
+        android:orientation="horizontal"
         android:visibility="gone"
         android:weightSum="5">
+
         <Button
             android:id="@+id/btn_variant_kg_unit_custom_add_product"
             android:layout_width="0dp"
@@ -36,8 +60,9 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/button"
-            android:textAllCaps="false"
-            android:text="K.G."/>
+            android:text="K.G."
+            android:textAllCaps="false" />
+
         <Button
             android:id="@+id/btn_variant_liter_unit_custom_add_product"
             android:layout_width="0dp"
@@ -45,8 +70,9 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/button1"
-            android:textAllCaps="false"
-            android:text="Liter"/>
+            android:text="Liter"
+            android:textAllCaps="false" />
+
         <Button
             android:id="@+id/btn_variant_other_unit_custom_add_product"
             android:layout_width="0dp"
@@ -54,68 +80,122 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/button1"
-            android:textAllCaps="false"
-            android:text="Other"/>
+            android:text="Other"
+            android:textAllCaps="false" />
+
         <EditText
             android:id="@+id/edt_variant_other_unit_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/edit_text"
-            android:padding="3dp"
             android:hint="Type Unit"
-            android:visibility="gone"/>
+            android:padding="3dp"
+            android:visibility="gone" />
     </LinearLayout>
+
     <EditText
         android:id="@+id/edt_variant_size_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/edit_text"
         android:hint="Enter Variant/Size Name"
         android:padding="5dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/edt_choose_Image_add_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/edit_text"
+            android:padding="5dp"
+            android:text="Choose Image"
+            android:textColor="#000"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/btn_select_image_add_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_attach_file_24" />
+
+        <ImageView
+            android:id="@+id/btn_select_image_camera_add_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:src="@drawable/ic_camera_alt_black_24dp" />
+
+    </LinearLayout>
+
     <EditText
         android:id="@+id/edt_variant_barcode_custom_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text"
-        android:hint="Enter Varient Barcode"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edit_text"
+        android:drawableRight="@drawable/barcode"
+        android:hint="Enter the barcode"
         android:padding="5dp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:weightSum="2">
+        android:weightSum="4">
 
         <EditText
             android:id="@+id/edt_variant_mrp_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@drawable/edit_text"
-            android:hint="Mrp"
+            android:hint="MRP"
             android:padding="5dp" />
 
         <EditText
             android:id="@+id/edt_variant_price_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="2"
             android:background="@drawable/edit_text"
             android:hint="Price"
             android:padding="5dp" />
     </LinearLayout>
+
     <EditText
         android:id="@+id/edt_variant_stock_custom_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:hint="Enter Stock"/>
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edit_text"
+        android:hint="Enter opening stock"
+        android:padding="5dp" />
+
+
 </LinearLayout>

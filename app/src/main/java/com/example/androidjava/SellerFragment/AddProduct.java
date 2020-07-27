@@ -60,15 +60,15 @@ import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImag
 public class AddProduct extends Fragment {
     private Button btnRequest, btnKgVarient, btnLiterVariant, btnOtherVariant;
     private ImageView btnAddImage, imgAddImageToCamera;
-    private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit,edtVariantSize;
+    private EditText edtProductName, edtProductBarCode, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit,edtVariantSize,edtProductStock;
     private Spinner spnProductCategory;
-    private RadioButton rbPacked, rbLoose, rbVariantYes, rbVariantNo, rbReturnable, rbReturnableNot;
+    private RadioButton rbPacked, rbLoose, rbReturnable;
     private TextView txtChooseImage;
     private Bitmap bitmap;
     private String strProductImage = "";
     private SharedPreferences sharedPreferences;
     private RecyclerView recycleVariant;
-    private LinearLayout linearCategory, linearVarient;
+    private LinearLayout linearCategory;
     private ImageView imgVarient;
     private List<mVarient> listVarient;
     private String proudctPacked, strRurnable = "Yes", strProductunit = "K.G.";
@@ -148,20 +148,6 @@ public class AddProduct extends Fragment {
             }
         });
 
-        rbVariantYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (rbVariantYes.isChecked()) {
-                    linearVarient.setVisibility(View.VISIBLE);
-                    recycleVariant.setVisibility(View.VISIBLE);
-                }
-                else{
-                    listVarient.clear();
-                    linearVarient.setVisibility(View.GONE);
-                    recycleVariant.setVisibility(View.GONE);
-                }
-            }
-        });
         imgVarient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -284,10 +270,7 @@ public class AddProduct extends Fragment {
             Toast.makeText(getActivity(), "Select Packed or loose any one properly", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (rbLoose.isChecked() && edtVariant.getText().toString().trim().isEmpty()) {
-            Toast.makeText(getActivity(), "Please enter variant of packed item(Like 1kg,2kg,500gm)", Toast.LENGTH_LONG).show();
-            return false;
-        }
+
         if (strProductImage.equals("")) {
             Toast.makeText(getActivity(), "Please select image of product", Toast.LENGTH_LONG)
                     .show();
@@ -327,7 +310,6 @@ public class AddProduct extends Fragment {
         spnProductCategory = view.findViewById(R.id.spn_product_type_add_product);
         rbPacked = view.findViewById(R.id.rb_packed_add_product);
         rbLoose = view.findViewById(R.id.rb_loose_add_product);
-        edtVariant = view.findViewById(R.id.edt_variant_add_product);
         edtMrp = view.findViewById(R.id.edt_mrp_add_product);
         edtPrice = view.findViewById(R.id.edt_price_add_product);
         edtShortDescription = view.findViewById(R.id.edt_short_description_add_product);
@@ -336,8 +318,7 @@ public class AddProduct extends Fragment {
         btnKgVarient = view.findViewById(R.id.btn_unit_kg_add_product);
         btnLiterVariant = view.findViewById(R.id.btn_unit_liter_add_product);
         btnOtherVariant = view.findViewById(R.id.btn_unit_other_add_product);
-        rbVariantYes = view.findViewById(R.id.rb_variant_yes_add_product);
-        rbVariantNo = view.findViewById(R.id.rb_variant_not_add_product);
+
         linearCategory = view.findViewById(R.id.linear_unit_add_product);
         linearCategory.setVisibility(View.GONE);
         recycleVariant = view.findViewById(R.id.recycle_variant_add_product);
@@ -345,15 +326,13 @@ public class AddProduct extends Fragment {
         recycleVariant.setLayoutManager(new LinearLayoutManager(getActivity()));
         imgVarient = view.findViewById(R.id.img_add_variant_add_product);
         listVarient = new ArrayList<>();
-        linearVarient = view.findViewById(R.id.linear_variant_add_product);
-        linearVarient.setVisibility(View.GONE);
         rbReturnable = view.findViewById(R.id.rb_returnable_yes_add_product);
-        rbReturnableNot = view.findViewById(R.id.rb_returnable_no_add_product);
         imgAddImageToCamera = view.findViewById(R.id.btn_select_image_camera_add_product);
         edtOtherUnit=view.findViewById(R.id.edt_unit_other_add_product);
         switchFoodItemOrNot=view.findViewById(R.id.switch_food_item_or_not_add_product);
         rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
         edtVariantSize=view.findViewById(R.id.edt_variant_size_add_product);
+        edtProductStock=view.findViewById(R.id.edt_stock_add_product);
     }
 
     private class AddProductDatabase extends AsyncTask<Void, Void, String> {
@@ -377,6 +356,7 @@ public class AddProduct extends Fragment {
             list.add(new BasicNameValuePair("ProductPackage", proudctPacked));
             list.add(new BasicNameValuePair("ProductShortDescription", edtShortDescription.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductDescription", edtDescription.getText().toString().trim()));
+            list.add(new BasicNameValuePair("ProductVariantStock",edtProductStock.getText().toString()));
             if(strProductunit.equals("Other")){
                 strProductunit=edtOtherUnit.getText().toString().trim();
             }
