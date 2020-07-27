@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/btn_cancel_varient_custom_add_product"
         android:layout_width="wrap_content"
@@ -10,10 +11,11 @@
         android:layout_gravity="end"
         android:layout_margin="5dp"
         android:background="@drawable/cancel_button"
+        android:padding="5dp"
         android:text="Cancel Variant"
         android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:padding="5dp"/>
+        android:textColor="#ffffff" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,14 +97,14 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edt_variant_size_add_product"
+        android:id="@+id/edt_variant_size_custom_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/edit_text"
         android:hint="Enter Variant/Size Name"
         android:padding="5dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,7 +114,7 @@
         android:weightSum="3">
 
         <TextView
-            android:id="@+id/edt_choose_Image_add_product"
+            android:id="@+id/edt_choose_Image_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -127,21 +129,20 @@
             android:textSize="18dp" />
 
         <ImageView
-            android:id="@+id/btn_select_image_add_product"
+            android:id="@+id/btn_select_image_varient_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:padding="5dp"
             android:src="@drawable/ic_baseline_attach_file_24" />
 
         <ImageView
-            android:id="@+id/btn_select_image_camera_add_product"
+            android:id="@+id/btn_select_image_camera_varient_custom_add_product"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:padding="5dp"
+
             android:src="@drawable/ic_camera_alt_black_24dp" />
 
     </LinearLayout>
@@ -150,9 +151,7 @@
         android:id="@+id/edt_variant_barcode_custom_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_margin="5dp"
         android:background="@drawable/edit_text"
         android:drawableRight="@drawable/barcode"
         android:hint="Enter the barcode"
@@ -164,6 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="horizontal"
+
         android:weightSum="4">
 
         <EditText
@@ -190,9 +190,7 @@
         android:id="@+id/edt_variant_stock_custom_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_margin="5dp"
         android:background="@drawable/edit_text"
         android:hint="Enter opening stock"
         android:padding="5dp" />

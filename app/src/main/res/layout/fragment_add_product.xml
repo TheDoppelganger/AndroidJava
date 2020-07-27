@@ -346,7 +346,6 @@
                 android:layout_gravity="end"
                 android:layout_margin="10dp"
                 android:background="@drawable/button"
-                android:gravity="end"
                 android:text="Add Variant"
                 android:textAllCaps="false"
                 android:textColor="#000" />

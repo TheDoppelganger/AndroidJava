@@ -8,17 +8,19 @@ public class mVarient {
     private String productUnit;
     private String productStock;
     private String productBarCode;
-
+    private String productVariantImage;
+    private String productvariantImageName;
     public mVarient() {
     }
 
-    public mVarient(String productMrp, String productPrice, String proudctPacked, String productUnit, String productStock, String productBarCode) {
+    public mVarient(String productMrp, String productPrice, String proudctPacked, String productUnit, String productStock, String productBarCode,String productvariantImageName) {
         this.productMrp = productMrp;
         this.productPrice = productPrice;
         this.proudctPacked = proudctPacked;
         this.productUnit = productUnit;
         this.productStock = productStock;
         this.productBarCode = productBarCode;
+        this.productvariantImageName=productvariantImageName;
     }
 
     public String getProductMrp() {
@@ -67,5 +69,21 @@ public class mVarient {
 
     public void setProductBarCode(String productBarCode) {
         this.productBarCode = productBarCode;
+    }
+
+    public String getProductVariantImage() {
+        return productVariantImage;
+    }
+
+    public void setProductVariantImage(String productVariantImage) {
+        this.productVariantImage = productVariantImage;
+    }
+
+    public String getProductvariantImageName() {
+        return productvariantImageName;
+    }
+
+    public void setProductvariantImageName(String productvariantImageName) {
+        this.productvariantImageName = productvariantImageName;
     }
 }

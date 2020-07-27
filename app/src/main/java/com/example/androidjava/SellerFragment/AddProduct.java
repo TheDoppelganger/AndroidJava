@@ -44,6 +44,7 @@ import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.Model.mVarient;
 import com.example.androidjava.R;
 import com.example.androidjava.SellerActivity;
+import com.example.androidjava.SupportInterFace.AdapterCallItemNumber;
 import com.google.gson.Gson;
 
 import org.apache.http.NameValuePair;
@@ -57,7 +58,7 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImage;
 
-public class AddProduct extends Fragment {
+public class AddProduct extends Fragment implements AdapterCallItemNumber {
     private Button btnRequest, btnKgVarient, btnLiterVariant, btnOtherVariant;
     private ImageView btnAddImage, imgAddImageToCamera;
     private EditText edtProductName, edtProductBarCode, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit,edtVariantSize,edtProductStock;
@@ -69,12 +70,16 @@ public class AddProduct extends Fragment {
     private SharedPreferences sharedPreferences;
     private RecyclerView recycleVariant;
     private LinearLayout linearCategory;
-    private ImageView imgVarient;
+    private Button imgVarient;
     private List<mVarient> listVarient;
     private String proudctPacked, strRurnable = "Yes", strProductunit = "K.G.";
     private int CAMERA_REQUEST = 200;
     private Switch switchFoodItemOrNot;
     private RadioGroup rgFoodItemYes;
+    private AddProduct addProduct;
+    private String variantImage;
+    private int setVariantListNumber=0;
+    private AddProductVarient addProductVarient;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -152,9 +157,9 @@ public class AddProduct extends Fragment {
             @Override
             public void onClick(View v) {
                 if (listVarient.size() < 5) {
-                    mVarient varient = new mVarient("", "", "Packed","","","");
+                    mVarient varient = new mVarient("", "", "Packed","","","","Choose Image:");
                     listVarient.add(varient);
-                    AddProductVarient addProductVarient = new AddProductVarient(listVarient, getActivity());
+                    addProductVarient = new AddProductVarient(listVarient, getActivity(),addProduct);
                     recycleVariant.setAdapter(addProductVarient);
                 } else {
                     Toast.makeText(getActivity(), "You Can Add 5 Varient Under One Product", Toast.LENGTH_LONG).show();
@@ -219,20 +224,47 @@ public class AddProduct extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode ==5000 && resultCode == Activity.RESULT_OK){
+            if (data != null) {
+                String path = null;
+                if (Build.VERSION.SDK_INT < 11)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
+                else if (Build.VERSION.SDK_INT < 19)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
+                else
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
+
+                File file = new File(path);
+                long size = file.length() / 1024;
+                if (size < 400) {
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    variantImage = getStringImage(bitmap);
+                    String fileName= JsonParse.getFileName(data.getData(),getActivity());
+                    mVarient varient=listVarient.get(setVariantListNumber);
+                    varient.setProductVariantImage(variantImage);
+                    varient.setProductvariantImageName(fileName);
+                    addProductVarient.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getActivity(), "File size must be less than 400 Kb...", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
         if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String path = null;
                 if (Build.VERSION.SDK_INT < 11)
                     path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
-
-                    // SDK >= 11 && SDK < 19
                 else if (Build.VERSION.SDK_INT < 19)
                     path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
-
-                    // SDK > 19 (Android 4.4)
                 else
                     path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
-                // Get the file instance
+
                 File file = new File(path);
                 long size = file.length() / 1024;
 
@@ -256,6 +288,7 @@ public class AddProduct extends Fragment {
             strProductImage = getStringImage(bitmap);
             txtChooseImage.setText("Camera Image:1");
         }
+
     }
 
     private boolean checkEmpty() {
@@ -333,6 +366,12 @@ public class AddProduct extends Fragment {
         rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
         edtVariantSize=view.findViewById(R.id.edt_variant_size_add_product);
         edtProductStock=view.findViewById(R.id.edt_stock_add_product);
+        addProduct=this;
+    }
+
+    @Override
+    public void inListItemNumber(int number) {
+        setVariantListNumber=number;
     }
 
     private class AddProductDatabase extends AsyncTask<Void, Void, String> {
@@ -372,6 +411,7 @@ public class AddProduct extends Fragment {
                     list.add(new BasicNameValuePair("ProductPacked" + i, varient.getProudctPacked()));
                     list.add(new BasicNameValuePair("ProductVariantBarcode"+i,varient.getProductBarCode()));
                     list.add(new BasicNameValuePair("ProductVariantStock"+i,varient.getProductStock()));
+                    list.add(new BasicNameValuePair("ProductVariantImage"+i,varient.getProductVariantImage()));
                     if(!varient.getProudctPacked().equals("Packed")){
                         list.add(new BasicNameValuePair("ProductUnit"+i,varient.getProductUnit()));
                     }

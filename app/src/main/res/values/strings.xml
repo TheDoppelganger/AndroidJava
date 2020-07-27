@@ -23,6 +23,9 @@
         <item>Grocery</item>
         <item>Stationary</item>
         <item>Fast Food</item>
+        <item>Fruits</item>
+        <item>Vegetable</item>
+        <item>Daily Search</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
