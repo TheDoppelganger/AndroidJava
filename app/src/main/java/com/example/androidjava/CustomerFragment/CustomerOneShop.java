@@ -97,7 +97,7 @@ public class CustomerOneShop extends Fragment implements AddRemoveFunction {
                 shopLat = Double.parseDouble(b.getString("shopLat"));
                 shopLong = Double.parseDouble(b.getString("shopLong"));
                 distance = Math.ceil(JsonParse.distance(userLat, userLong, shopLat, shopLong));
-                txtShopDistance.setText(String.valueOf(distance));
+                txtShopDistance.setText(String.valueOf(distance) + " km");
             }
         }
         new GetShopDetailsWithProducts().execute();
