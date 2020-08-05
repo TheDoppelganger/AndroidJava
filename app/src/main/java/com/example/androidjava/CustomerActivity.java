@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -23,6 +24,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.androidjava.ApiCalling.ApiUrls;
 import com.example.androidjava.CustomerFragment.CustomerJobForJobless;
+import com.example.androidjava.CustomerFragment.CustomerMyBills;
 import com.example.androidjava.CustomerFragment.CustomerMyCart;
 import com.example.androidjava.CustomerFragment.CustomerMyFavourite;
 import com.example.androidjava.CustomerFragment.CustomerOrderHistory;
@@ -49,6 +51,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ImageView imgViewCart,imgChangeLocation;
+    TextView tvUserName;
     private Gson gson;
     private mUser muser;
     private ToggleButton btnSwitchToCustoemer;
@@ -72,41 +75,55 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.main_nav_view_customer);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
-        imgViewCart = findViewById(R.id.cart_customer_tool_bar);
-        imgChangeLocation=findViewById(R.id.location_customer_tool_bar);
-        imgChangeLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
-                    Intent io=new Intent(CustomerActivity.this,GoogleMap.class);
-                    String shop=sharedPreferences.getString("allShop","123");
-                    io.putExtra("Activity",shop);
-                    startActivity(io);
-                }
-            }
-        });
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-        imageViewFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).commit();
-                }
-            }
-        });
-        imgViewCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).commit();
-                }
-            }
-        });
+
+        tvUserName = headerView.findViewById(R.id.tvUserName);
+
+        tvUserName.setText(muser.getName());
+
+
+//        imgViewCart = findViewById(R.id.cart_customer_tool_bar);
+//        imgChangeLocation=findViewById(R.id.location_customer_tool_bar);
+//
+//        imgChangeLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+//                    Intent io=new Intent(CustomerActivity.this,GoogleMap.class);
+//                    String shop=sharedPreferences.getString("allShop","123");
+//                    io.putExtra("Activity",shop);
+//                    startActivity(io);
+//                }
+//            }
+//        });
+
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
+
+//        imageViewFav.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).addToBackStack(null).commit();
+//                }
+//            }
+//        });
+
+//        imgViewCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
+//                }
+//            }
+//        });
+
+
+
+
         navigationView.setNavigationItemSelectedListener(this);
         checkDriverToCustomer();
         if (muser.getUser_type().equals("Driver")) {
@@ -164,8 +181,14 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new SellerProfileCustomer()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
+
             case R.id.customer_menu_after_log_mycart:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.customer_menu_after_log_mybills:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyBills()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_myfavourite:

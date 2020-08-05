@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/llChooseCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_edit_text"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Spinner
+            android:id="@+id/spCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llChooseCategory"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_edit_text"
+        android:hint="Enter The Name of the Product"
+        android:inputType="number"
+        android:padding="8dp" />
+
+    <LinearLayout
+        android:id="@+id/llEnterVarient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etProductName"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_edit_text"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:background="@null"
+                android:hint="Enter Variant/Size Name" />
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Packed"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loose"
+                    android:checked="true"
+
+                    />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="KG" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Liter" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Others" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlEnterBarcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_below="@+id/llEnterVarient"
+        android:background="@drawable/shape_edit_text"
+        android:layout_marginTop="15dp"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/etBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="Enter the Bar Code"
+            android:layout_centerInParent="true"
+            android:inputType="number"/>
+
+        <ImageView
+            android:id="@+id/btnBarcodeScan"
+            android:layout_width="32dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_barcode_scan"
+            android:layout_centerInParent="true"
+            android:layout_margin="4dp"
+            android:text="Button"/>
+
+
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etEnterMRP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlEnterBarcode"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_edit_text"
+        android:hint="Enter MRP"
+        android:inputType="number"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/etEnterSP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etEnterMRP"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_edit_text"
+        android:hint="Enter Selling Price"
+        android:inputType="number"
+        android:padding="8dp" />
+
+    <LinearLayout
+        android:id="@+id/llUploadImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:layout_below="@id/etEnterSP"
+        >
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"
+            android:text="Upload Product Image"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_margin="3dp"
+            />
+
+        <ImageView
+            android:src="@drawable/ic_attachment_svgrepo_com"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/ic_camera_alt_black_24dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etEnterCurrentStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llUploadImage"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_edit_text"
+        android:hint="Enter Current Stock"
+        android:inputType="number"
+        android:padding="8dp" />
+
+
+    <Button
+        android:id="@+id/btnAddVarient"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:layout_below="@id/etEnterCurrentStock"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="12dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shapebutn"
+        android:text="Add Varient"
+        android:textColor="@color/white"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:layout_below="@id/btnAddVarient"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="12dp"
+        android:background="@android:color/black"
+        android:text="Submit for Publish"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>
+
+
+
+</ScrollView>

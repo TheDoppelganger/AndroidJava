@@ -29,7 +29,10 @@
                 android:title="@string/setting" />
             <item
                 android:id="@+id/menu_after_log_offline_billing"
-                android:title="Offline Billing" />
+                android:title="Offline Billing"/>
+            <item
+                android:id="@+id/menu_after_log_online_billing"
+                android:title="Online Billing"/>
 
         </menu>
     </item>

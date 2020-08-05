@@ -19,11 +19,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="All Shop Near to Me"
+            android:text=" All Shop Near to Me"
             android:textColor="#000"
-            android:textSize="20dp"
+            android:textSize="18sp"
+
             android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_baseline_keyboard_backspace_24"
             tools:ignore="HardcodedText" />
         <View
             android:layout_width="match_parent"

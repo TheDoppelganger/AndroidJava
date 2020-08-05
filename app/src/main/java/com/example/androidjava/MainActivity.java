@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         sharedPreferences = getApplicationContext().getSharedPreferences("Database", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        mtoolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        mtoolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(mtoolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         drawerLayout = findViewById(R.id.main_drawer);
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                drawerLayout.openDrawer(GravityCompat.START);
 //            }
 //        });
-        NavigationView navigationView = findViewById(R.id.main_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationView navigationView = findViewById(R.id.main_nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
         io = getIntent();
         if (io.getStringExtra("lat") != null && io.getStringExtra("lang") != null) {
             latitude = io.getStringExtra("lat");
@@ -85,14 +85,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-
-        inflater.inflate(R.menu.menu_main, menu);
-        Log.d("TAG", "onCreateOptionsMenu: working");
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//
+//        inflater.inflate(R.menu.menu_main, menu);
+//        Log.d("TAG", "onCreateOptionsMenu: working");
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
