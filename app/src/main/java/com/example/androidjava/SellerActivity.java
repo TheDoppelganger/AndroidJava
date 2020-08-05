@@ -33,6 +33,7 @@ import com.example.androidjava.SellerFragment.SellerDashboard;
 import com.example.androidjava.SellerFragment.SellerMyEarning;
 import com.example.androidjava.SellerFragment.SellerNewOrder;
 import com.example.androidjava.SellerFragment.SellerOfflineBilling;
+import com.example.androidjava.SellerFragment.SellerOnlineBilling;
 import com.example.androidjava.SellerFragment.SellerProfile;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -192,6 +193,10 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 break;
             case R.id.menu_after_log_offline_billing:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).addToBackStack(null).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.menu_after_log_online_billing:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOnlineBilling()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_myearning:

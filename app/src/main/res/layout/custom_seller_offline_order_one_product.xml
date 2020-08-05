@@ -4,72 +4,90 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="8">
+        android:layout_margin="5dp">
+
+
         <TextView
             android:id="@+id/txt_sl_no_custom_seller_offline_order"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:text="1"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sl"
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/txt_item_name_custom_seller_offline_order"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:text="Item Name"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Item Name"
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/txt_item_mrp_custom_seller_offline_order"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Mrp"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="MRP"
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/txt_item_price_custom_seller_offline_order"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Price"/>
-        <ImageView
-            android:id="@+id/img_item_add_custom_seller_offline_order"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
+            android:text="Price"
+            android:textSize="12sp" />
+
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:padding="5dp"
-            android:src="@drawable/ic_add_black_24dp" />
-        <TextView
-            android:id="@+id/txt_item_qui_custom_seller_offline_order"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Qut"/>
-        <ImageView
-            android:id="@+id/img_item_remove_custom_seller_offline_order"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:padding="5dp"
-            android:src="@drawable/ic_remove_black_24dp" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/img_item_add_custom_seller_offline_order"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:padding="5dp"
+                android:src="@drawable/ic_add_black_24dp" />
+
+            <TextView
+                android:id="@+id/txt_item_qui_custom_seller_offline_order"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Qty"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/img_item_remove_custom_seller_offline_order"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:padding="5dp"
+                android:src="@drawable/ic_remove_black_24dp" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/txt_item_amount_custom_seller_offline_order"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.6"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Amount"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
+            android:text="Amount"
+            android:textAlignment="center"
+            android:textSize="12sp" />
+
+
     </LinearLayout>
+
 </LinearLayout>

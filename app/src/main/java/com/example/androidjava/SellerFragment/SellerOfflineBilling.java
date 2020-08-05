@@ -65,15 +65,15 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_seller_offline_billing, container, false);
+        final View view = inflater.inflate(R.layout.fragment_seller_offline_billing2, container, false);
         findViewById(view);
         Gson gson = new Gson();
         String user = sharedPreferences.getString("seller", null);
         seller = gson.fromJson(user, mSeller.class);
-        txtShopName.setText(seller.getShop_name());
-        txtShopEmail.setText(seller.getShop_contact_email());
-        txtShopPhone.setText(seller.getShop_contact_number());
-        txtShopAddress.setText(seller.getShop_pincode());
+//        txtShopName.setText(seller.getShop_name());
+//        txtShopEmail.setText(seller.getShop_contact_email());
+//        txtShopPhone.setText(seller.getShop_contact_number());
+//        txtShopAddress.setText(seller.getShop_pincode());
         shopId = seller.getId();
         final String product = sharedPreferences.getString("product", null);
         try {
@@ -124,10 +124,10 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
     }
 
     public void findViewById(View view) {
-        txtShopName = view.findViewById(R.id.txt_shop_name_offline_billing);
-        txtShopAddress = view.findViewById(R.id.txt_shop_address_offline_billing);
-        txtShopPhone = view.findViewById(R.id.txt_shop_phone_offline_billing);
-        txtShopEmail = view.findViewById(R.id.txt_shop_email_offline_billing);
+//        txtShopName = view.findViewById(R.id.txt_shop_name_offline_billing);
+//        txtShopAddress = view.findViewById(R.id.txt_shop_address_offline_billing);
+//        txtShopPhone = view.findViewById(R.id.txt_shop_phone_offline_billing);
+//        txtShopEmail = view.findViewById(R.id.txt_shop_email_offline_billing);
         txtTotalAmount = view.findViewById(R.id.txt_total_amount_bill_offline_billing);
         edtBarcode = view.findViewById(R.id.edt_item_barcode_offline_billing);
         list = new ArrayList<>();
