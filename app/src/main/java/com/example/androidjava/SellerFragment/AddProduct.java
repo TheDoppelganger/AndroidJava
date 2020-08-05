@@ -22,7 +22,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +39,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidjava.Adapter.AddProductVarient;
 import com.example.androidjava.ApiCalling.ApiUrls;
 import com.example.androidjava.DatabaseConnection.JsonParse;
+import com.example.androidjava.DriverFragment.DriverRegistration2;
 import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.Model.mVarient;
 import com.example.androidjava.R;
 import com.example.androidjava.SellerActivity;
+import com.example.androidjava.SupportInterFace.AdapterCallItemNumber;
 import com.google.gson.Gson;
 
 import org.apache.http.NameValuePair;
@@ -54,23 +58,28 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImage;
 
-public class AddProduct extends Fragment {
-    private Button btnRequest;
+public class AddProduct extends Fragment implements AdapterCallItemNumber {
+    private Button btnRequest, btnKgVarient, btnLiterVariant, btnOtherVariant;
     private ImageView btnAddImage, imgAddImageToCamera;
-    private EditText edtProductName, edtProductBarCode, edtVariant, edtMrp, edtPrice, edtShortDescription, edtDescription;
-    private Spinner spnProductCategory, spnProductUnit;
-    private RadioButton rbPacked, rbLoose, rbVariantYes, rbVariantNo, rbReturnable, rbReturnableNot;
+    private EditText edtProductName, edtProductBarCode, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit,edtVariantSize,edtProductStock;
+    private Spinner spnProductCategory;
+    private RadioButton rbPacked, rbLoose, rbReturnable;
     private TextView txtChooseImage;
     private Bitmap bitmap;
     private String strProductImage = "";
     private SharedPreferences sharedPreferences;
     private RecyclerView recycleVariant;
-    private LinearLayout linearCategory, linearVarient;
-    private ImageView imgVarient;
+    private LinearLayout linearCategory;
+    private Button imgVarient;
     private List<mVarient> listVarient;
-    private String proudctPacked, strRurnable = "Yes";
+    private String proudctPacked, strRurnable = "Yes", strProductunit = "K.G.";
     private int CAMERA_REQUEST = 200;
-
+    private Switch switchFoodItemOrNot;
+    private RadioGroup rgFoodItemYes;
+    private AddProduct addProduct;
+    private String variantImage;
+    private int setVariantListNumber=0;
+    private AddProductVarient addProductVarient;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -144,25 +153,56 @@ public class AddProduct extends Fragment {
             }
         });
 
-        rbVariantYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (rbVariantYes.isChecked())
-                    linearVarient.setVisibility(View.VISIBLE);
-                else
-                    linearVarient.setVisibility(View.GONE);
-            }
-        });
         imgVarient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listVarient.size() < 5) {
-                    mVarient varient = new mVarient("", "", "", "Packed");
+                    mVarient varient = new mVarient("", "", "Packed","","","","Choose Image:");
                     listVarient.add(varient);
-                    AddProductVarient addProductVarient = new AddProductVarient(listVarient, getActivity());
+                    addProductVarient = new AddProductVarient(listVarient, getActivity(),addProduct);
                     recycleVariant.setAdapter(addProductVarient);
                 } else {
                     Toast.makeText(getActivity(), "You Can Add 5 Varient Under One Product", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        btnKgVarient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnKgVarient.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button));
+                btnLiterVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnOtherVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                edtOtherUnit.setVisibility(View.GONE);
+                strProductunit="K.G.";
+            }
+        });
+        btnLiterVariant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnKgVarient.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnLiterVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button));
+                btnOtherVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                edtOtherUnit.setVisibility(View.GONE);
+                strProductunit="Liter";
+            }
+        });
+        btnOtherVariant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnKgVarient.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnLiterVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button1));
+                btnOtherVariant.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button));
+                edtOtherUnit.setVisibility(View.VISIBLE);
+                strProductunit="Other";
+            }
+        });
+        switchFoodItemOrNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                rgFoodItemYes.setVisibility(View.VISIBLE);
+                }else{
+                    rgFoodItemYes.setVisibility(View.GONE);
                 }
             }
         });
@@ -184,30 +224,78 @@ public class AddProduct extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
 
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                e.printStackTrace();
+        if(requestCode ==5000 && resultCode == Activity.RESULT_OK){
+            if (data != null) {
+                String path = null;
+                if (Build.VERSION.SDK_INT < 11)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
+                else if (Build.VERSION.SDK_INT < 19)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
+                else
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
+
+                File file = new File(path);
+                long size = file.length() / 1024;
+                if (size < 400) {
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    variantImage = getStringImage(bitmap);
+                    String fileName= JsonParse.getFileName(data.getData(),getActivity());
+                    mVarient varient=listVarient.get(setVariantListNumber);
+                    varient.setProductVariantImage(variantImage);
+                    varient.setProductvariantImageName(fileName);
+                    addProductVarient.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getActivity(), "File size must be less than 400 Kb...", Toast.LENGTH_SHORT).show();
+                }
             }
-            strProductImage = getStringImage(bitmap);
-            Uri uri = data.getData();
-            File file = new File(uri.getPath());
-            txtChooseImage.setText(file.getName());
-        } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
+        }
+        if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                String path = null;
+                if (Build.VERSION.SDK_INT < 11)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
+                else if (Build.VERSION.SDK_INT < 19)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
+                else
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
 
+                File file = new File(path);
+                long size = file.length() / 1024;
+
+                if (size < 400) {
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    strProductImage = getStringImage(bitmap);
+                    String fileName= JsonParse.getFileName(data.getData(),getActivity());
+                    txtChooseImage.setText(fileName);
+                }else{
+                    Toast.makeText(getActivity(), "File size must be less than 400 Kb...", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
             strProductImage = getStringImage(bitmap);
             txtChooseImage.setText("Camera Image:1");
         }
+
     }
 
     private boolean checkEmpty() {
         if (edtProductName.getText().toString().trim().isEmpty()
                 || spnProductCategory.getSelectedItem().toString().equals("Choose shop category?*")
-                || edtPrice.getText().toString().trim().isEmpty()) {
+                || edtPrice.getText().toString().trim().isEmpty()
+                || edtVariantSize.getText().toString().trim().isEmpty()) {
             Toast.makeText(getActivity(), "Enter Data Properly", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -215,10 +303,7 @@ public class AddProduct extends Fragment {
             Toast.makeText(getActivity(), "Select Packed or loose any one properly", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (rbLoose.isChecked() && edtVariant.getText().toString().trim().isEmpty()) {
-            Toast.makeText(getActivity(), "Please enter variant of packed item(Like 1kg,2kg,500gm)", Toast.LENGTH_LONG).show();
-            return false;
-        }
+
         if (strProductImage.equals("")) {
             Toast.makeText(getActivity(), "Please select image of product", Toast.LENGTH_LONG)
                     .show();
@@ -229,8 +314,9 @@ public class AddProduct extends Fragment {
                 mVarient varient = listVarient.get(i);
                 if (varient.getProductMrp().equals("")
                         || varient.getProductPrice().equals("")
-                        || varient.getProductVarient().equals("")
-                        || varient.getProudctPacked().equals("")) {
+                        || varient.getProudctPacked().equals("")
+                        || varient.getProductBarCode().equals("")
+                        || varient.getProductStock().equals("")) {
                     Toast.makeText(getActivity(), "Please Enter Different Varient Properly Of Product", Toast.LENGTH_LONG)
                             .show();
                     return false;
@@ -239,8 +325,8 @@ public class AddProduct extends Fragment {
 
             }
         }
-        if(rbPacked.isChecked()){
-            if(edtMrp.getText().toString().trim().isEmpty()){
+        if (rbPacked.isChecked()) {
+            if (edtMrp.getText().toString().trim().isEmpty()) {
                 Toast.makeText(getActivity(), "Enter  mrp Data Properly", Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -257,15 +343,15 @@ public class AddProduct extends Fragment {
         spnProductCategory = view.findViewById(R.id.spn_product_type_add_product);
         rbPacked = view.findViewById(R.id.rb_packed_add_product);
         rbLoose = view.findViewById(R.id.rb_loose_add_product);
-        edtVariant = view.findViewById(R.id.edt_variant_add_product);
         edtMrp = view.findViewById(R.id.edt_mrp_add_product);
         edtPrice = view.findViewById(R.id.edt_price_add_product);
         edtShortDescription = view.findViewById(R.id.edt_short_description_add_product);
         edtDescription = view.findViewById(R.id.edt_description_add_product);
         btnAddImage = view.findViewById(R.id.btn_select_image_add_product);
-        spnProductUnit = view.findViewById(R.id.spn_unit_price_add_product);
-        rbVariantYes = view.findViewById(R.id.rb_variant_yes_add_product);
-        rbVariantNo = view.findViewById(R.id.rb_variant_not_add_product);
+        btnKgVarient = view.findViewById(R.id.btn_unit_kg_add_product);
+        btnLiterVariant = view.findViewById(R.id.btn_unit_liter_add_product);
+        btnOtherVariant = view.findViewById(R.id.btn_unit_other_add_product);
+
         linearCategory = view.findViewById(R.id.linear_unit_add_product);
         linearCategory.setVisibility(View.GONE);
         recycleVariant = view.findViewById(R.id.recycle_variant_add_product);
@@ -273,11 +359,19 @@ public class AddProduct extends Fragment {
         recycleVariant.setLayoutManager(new LinearLayoutManager(getActivity()));
         imgVarient = view.findViewById(R.id.img_add_variant_add_product);
         listVarient = new ArrayList<>();
-        linearVarient = view.findViewById(R.id.linear_variant_add_product);
-        linearVarient.setVisibility(View.GONE);
         rbReturnable = view.findViewById(R.id.rb_returnable_yes_add_product);
-        rbReturnableNot = view.findViewById(R.id.rb_returnable_no_add_product);
         imgAddImageToCamera = view.findViewById(R.id.btn_select_image_camera_add_product);
+        edtOtherUnit=view.findViewById(R.id.edt_unit_other_add_product);
+        switchFoodItemOrNot=view.findViewById(R.id.switch_food_item_or_not_add_product);
+        rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
+        edtVariantSize=view.findViewById(R.id.edt_variant_size_add_product);
+        edtProductStock=view.findViewById(R.id.edt_stock_add_product);
+        addProduct=this;
+    }
+
+    @Override
+    public void inListItemNumber(int number) {
+        setVariantListNumber=number;
     }
 
     private class AddProductDatabase extends AsyncTask<Void, Void, String> {
@@ -301,17 +395,26 @@ public class AddProduct extends Fragment {
             list.add(new BasicNameValuePair("ProductPackage", proudctPacked));
             list.add(new BasicNameValuePair("ProductShortDescription", edtShortDescription.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductDescription", edtDescription.getText().toString().trim()));
-            list.add(new BasicNameValuePair("ProductUnit", spnProductUnit.getSelectedItem().toString().trim()));
+            list.add(new BasicNameValuePair("ProductVariantStock",edtProductStock.getText().toString()));
+            if(strProductunit.equals("Other")){
+                strProductunit=edtOtherUnit.getText().toString().trim();
+            }
+            list.add(new BasicNameValuePair("ProductUnit", strProductunit));
             list.add(new BasicNameValuePair("ProductMrp", edtMrp.getText().toString().trim()));
             list.add(new BasicNameValuePair("ProductPrice", edtPrice.getText().toString().trim()));
             if (listVarient.size() >= 1) {
                 for (int i = 0; i < listVarient.size(); i++) {
                     mVarient varient = listVarient.get(i);
                     list.add(new BasicNameValuePair("IsVarientAvailable", String.valueOf(i + 1)));
-                    list.add(new BasicNameValuePair("ProductVariant" + i, varient.getProductVarient()));
                     list.add(new BasicNameValuePair("ProductVariantMrp" + i, varient.getProductMrp()));
                     list.add(new BasicNameValuePair("ProductVariantPrice" + i, varient.getProductPrice()));
                     list.add(new BasicNameValuePair("ProductPacked" + i, varient.getProudctPacked()));
+                    list.add(new BasicNameValuePair("ProductVariantBarcode"+i,varient.getProductBarCode()));
+                    list.add(new BasicNameValuePair("ProductVariantStock"+i,varient.getProductStock()));
+                    list.add(new BasicNameValuePair("ProductVariantImage"+i,varient.getProductVariantImage()));
+                    if(!varient.getProudctPacked().equals("Packed")){
+                        list.add(new BasicNameValuePair("ProductUnit"+i,varient.getProductUnit()));
+                    }
                 }
                 list.add(new BasicNameValuePair("ProductVariant", "Yes"));
             } else {

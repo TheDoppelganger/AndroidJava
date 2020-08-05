@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -29,12 +26,14 @@ import com.example.androidjava.DatabaseConnection.JsonParse;
 import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.Model.mUser;
 import com.example.androidjava.SellerFragment.SellerAllProduct;
+import com.example.androidjava.SellerFragment.SellerAllProductPending;
 import com.example.androidjava.SellerFragment.SellerDashboard;
 import com.example.androidjava.SellerFragment.SellerMyEarning;
 import com.example.androidjava.SellerFragment.SellerNewOrder;
 import com.example.androidjava.SellerFragment.SellerOfflineBilling;
 import com.example.androidjava.SellerFragment.SellerOnlineBilling;
 import com.example.androidjava.SellerFragment.SellerProfile;
+import com.google.android.gms.common.api.Api;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
@@ -55,6 +54,7 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
     private mSeller seller;
     private ToggleButton btnSwitchToCustoemer;
     private mUser muser;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +63,6 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         editor = sharedPreferences.edit();
         mtoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         gson = new Gson();
         String seller1 = sharedPreferences.getString("seller", "");
         seller = gson.fromJson(seller1, mSeller.class);
@@ -76,17 +73,17 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-//        ImageView imageView = findViewById(R.id.open_drawer);
-//        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
+        ImageView imageView = findViewById(R.id.open_drawer);
+        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
         NavigationView navigationView = findViewById(R.id.main_nav_view_seller);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                drawerLayout.openDrawer(GravityCompat.START);
-//            }
-//        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
         navigationView.setNavigationItemSelectedListener(this);
         toggleOpenClose = navigationView.getMenu().findItem(R.id.online_offfline_shop_status).getActionView().findViewById(R.id.toggle_menu_online_offline);
         toggleOpenClose.setTextOn("Open");
@@ -145,7 +142,7 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 }
             }
         });
-
+        new CacheShopProduct().execute();
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerDashboard()).commit();
     }
@@ -177,22 +174,21 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_after_log_log_out:
-                editor.remove("seller");
-                editor.remove("user");
+                editor.clear();
                 editor.commit();
                 startActivity(new Intent(SellerActivity.this, LogIn.class));
                 break;
             case R.id.menu_after_log_myproduct:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerAllProduct()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerAllProduct()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
 
             case R.id.menu_after_log_myorder:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerNewOrder()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerNewOrder()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_offline_billing:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_online_billing:
@@ -200,7 +196,7 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_myearning:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerMyEarning()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerMyEarning()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.online_offfline_shop_status:
@@ -217,21 +213,13 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 }
                 break;
             case R.id.menu_after_log_shopprofile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerProfile()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerProfile()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
         return false;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-
-        inflater.inflate(R.menu.menu_main, menu);
-        Log.d("TAG", "onCreateOptionsMenu: working");
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -257,6 +245,49 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
             list.add(new BasicNameValuePair("status", seller.getIsOpen()));
             list.add(new BasicNameValuePair("shopId", seller.getId()));
             return JsonParse.getJsonStringFromUrl(ApiUrls.driverSimpleRequest, list);
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    class CacheShopProduct extends  AsyncTask<Void,Void,String>{
+
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            List<NameValuePair> list=new ArrayList<>();
+            list.add(new BasicNameValuePair("productType","PendingProduct"));
+            list.add(new BasicNameValuePair("shopId",seller.getId()));
+            return JsonParse.getJsonStringFromUrl(ApiUrls.fetchProduct,list);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (s.equals("") || s.startsWith("Error1:")) {
+                Toast.makeText(getApplicationContext(), "Do not get any Response From database\nTry Again After Some Time" + s, Toast.LENGTH_LONG).show();
+            }else {
+                editor.putString("pendingProduct", s);
+                editor.commit();
+            }
+            new CacheShopPublishedProduct().execute();
+        }
+    }
+    class CacheShopPublishedProduct extends AsyncTask<Void,Void,String>
+    {
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        protected String doInBackground(Void... voids) {
+            List<NameValuePair> list=new ArrayList<>();
+            list.add(new BasicNameValuePair("productType","PublishedProduct"));
+            list.add(new BasicNameValuePair("shopId",seller.getId()));
+            return JsonParse.getJsonStringFromUrl(ApiUrls.fetchProduct,list);
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            if (s.equals("") || s.startsWith("Error1:")) {
+                Toast.makeText(getApplicationContext(), "Do not get any Response From database\nTry Again After Some Time" + s, Toast.LENGTH_LONG).show();
+            }else {
+                editor.putString("publishedProduct", s);
+                editor.commit();
+            }
         }
     }
     private void checkDriverToCustomer() {

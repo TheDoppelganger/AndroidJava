@@ -26,6 +26,56 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Is This Food Item?"
+                    android:textColor="#000" />
+
+                <Switch
+
+                    android:id="@+id/switch_food_item_or_not_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_food_item_yes_add_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Veg" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Contains Egg" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Non Veg" />
+            </RadioGroup>
+
             <EditText
                 android:id="@+id/edt_name_add_product"
                 android:layout_width="match_parent"
@@ -37,57 +87,31 @@
                 android:hint="Enter Product Name*"
                 android:padding="5dp" />
 
-            <EditText
-                android:id="@+id/edt_barcode_add_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/edit_text"
-                android:drawableRight="@drawable/barcode"
-                android:hint="Enter the barcode"
-                android:padding="5dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/edt_choose_Image_add_product"
-                    android:layout_width="0dp"
+                <RadioGroup
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/edit_text"
-                    android:padding="5dp"
-                    android:text="Choose Image"
-                    android:textColor="#000"
-                    android:textSize="18dp" />
-                <ImageView
-                    android:id="@+id/btn_select_image_add_product"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_baseline_attach_file_24"/>
-                <ImageView
-                    android:id="@+id/btn_select_image_camera_add_product"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_camera_alt_black_24dp"/>
+                    android:orientation="horizontal">
 
+                    <RadioButton
+                        android:id="@+id/rb_returnable_yes_add_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Returnable" />
+
+                    <RadioButton
+                        android:id="@+id/rb_returnable_no_add_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Non Returnable" />
+                </RadioGroup>
             </LinearLayout>
 
             <Spinner
@@ -100,65 +124,31 @@
                 android:entries="@array/spn_product_type"
                 android:padding="5dp" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/edt_short_description_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edit_text"
+                android:hint="Short Description"
+                android:padding="5dp" />
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_variant_not_add_product"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="Variant not available" />
-
-                    <RadioButton
-                        android:id="@+id/rb_variant_yes_add_product"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Variant available" />
-
-                </RadioGroup>
-            </LinearLayout>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/edt_description_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:id="@+id/linear_variant_add_product"
-                android:orientation="horizontal"
-                android:weightSum="4">
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edit_text"
+                android:hint="Description"
+                android:lines="5"
+                android:padding="5dp" />
 
-                <EditText
-                    android:id="@+id/edt_variant_add_product"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:editable="false"
-                    android:text="Yes"
-                    android:background="@drawable/edit_text"
-                    android:hint="!!!Variant"
-                    android:padding="5dp" />
-                <ImageView
-                    android:id="@+id/img_add_variant_add_product"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_add_circle_black_24dp"/>
-            </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recycle_variant_add_product"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -193,25 +183,116 @@
                 android:id="@+id/linear_unit_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="5">
+
+                <Button
+                    android:id="@+id/btn_unit_kg_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:text="K.G."
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_unit_liter_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button1"
+                    android:text="Liter"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_unit_other_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button1"
+                    android:text="Other"
+                    android:textAllCaps="false" />
+
+                <EditText
+                    android:id="@+id/edt_unit_other_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/edit_text"
+                    android:hint="Type Unit"
+                    android:padding="3dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_variant_size_add_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edit_text"
+                android:hint="Enter Variant/Size Name"
+                android:padding="5dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@android:color/transparent"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/edt_choose_Image_add_product"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Choose Unit"
-                    android:textColor="#000" />
-
-                <Spinner
-                    android:id="@+id/spn_unit_price_add_product"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="2"
                     android:background="@drawable/edit_text"
-                    android:entries="@array/spn_product_unit"
-                    android:gravity="center"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:text="Choose Image"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/btn_select_image_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_baseline_attach_file_24" />
+
+                <ImageView
+                    android:id="@+id/btn_select_image_camera_add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_camera_alt_black_24dp" />
+
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_barcode_add_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edit_text"
+                android:drawableRight="@drawable/barcode"
+                android:hint="Enter the barcode"
+                android:padding="5dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -241,51 +322,35 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/edt_short_description_add_product"
+                android:id="@+id/edt_stock_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/edit_text"
-                android:hint="Short Description"
+                android:hint="Enter opening stock"
                 android:padding="5dp" />
 
-            <EditText
-                android:id="@+id/edt_description_add_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/edit_text"
-                android:hint="Description"
-                android:lines="5"
-                android:padding="5dp" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_variant_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:orientation="horizontal">
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/rb_returnable_yes_add_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Returnable"
-                        android:checked="true"/>
-                    <RadioButton
-                        android:id="@+id/rb_returnable_no_add_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Non Returnable"/>
-                </RadioGroup>
-            </LinearLayout>
+                android:layout_margin="10dp" />
+
+            <Button
+                android:id="@+id/img_add_variant_add_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
+                android:background="@drawable/button"
+                android:text="Add Variant"
+                android:textAllCaps="false"
+                android:textColor="#000" />
+
+
             <Button
                 android:id="@+id/add_product_btn_request_product"
                 android:layout_width="wrap_content"

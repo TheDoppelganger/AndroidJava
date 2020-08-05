@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
 <!--        <include-->
 <!--            android:id="@+id/reg_toolbar"-->
 <!--            layout="@layout/toolbar_file" />-->
@@ -88,12 +89,13 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+
         <LinearLayout
             android:id="@+id/partner_main_linear_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/footer"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/reg_toolbar"
             android:background="#FFF">
 
             <LinearLayout
@@ -153,6 +155,7 @@
                 android:gravity="end">
 
                 <ImageView
+                    android:id="@+id/img"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_person_black_24dp" />

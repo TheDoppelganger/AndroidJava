@@ -23,11 +23,11 @@
         <item>Grocery</item>
         <item>Stationary</item>
         <item>Fast Food</item>
+        <item>Fruits</item>
+        <item>Vegetable</item>
+        <item>Daily Search</item>
     </string-array>
-    <string-array name="spn_product_unit">
-        <item>K.G.</item>
-        <item>Liter</item>
-    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="check_out_generate_bill"><![CDATA[Check Out & Generate Bill]]></string>

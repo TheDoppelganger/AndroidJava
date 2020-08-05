@@ -27,6 +27,7 @@ import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
 import com.example.androidjava.ApiCalling.ApiUrls;
 import com.example.androidjava.DatabaseConnection.JsonParse;
+import com.example.androidjava.LogIn;
 import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.Model.mUser;
 import com.example.androidjava.R;
@@ -62,20 +63,7 @@ public class SellerRegistration3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seller_registration3, container, false);
-        Scanner in=new Scanner(System.in);
-        int testCase=in.nextInt();
-        if(testCase > 0 && testCase < 10){
-            String[] reverseString=new String[testCase];
-            for(int i= 0 ; i<testCase ; i++){
-                String enterString=in.next();
-                StringBuilder sb=new StringBuilder(enterString);
-                sb.reverse();
-                reverseString[i]=sb.toString();
-            }
-            for(int j = 0;j<reverseString.length;j++){
-                System.out.println(reverseString[j]);
-            }
-        }
+
         findViewById(view);
         sharedPreferences = getContext().getSharedPreferences("Database", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -197,11 +185,6 @@ public class SellerRegistration3 extends Fragment {
                     String register = jsonObject.getString("register");
                     if (register.equals("Register Successfully")) {
                         sellerId=String.valueOf(jsonObject.getInt("id"));
-                        mSeller seller = new mSeller(String.valueOf(jsonObject.getInt("id")), strShopName, strShopPinCode, strShopLatitude, strShopLongitude, strShopFrontImage, strShopInventoryImage, strShopCategory, strShopPhone, strShopEmail, strShopGST);
-                        Gson gson = new Gson();
-                        String seller1 = gson.toJson(seller);
-                        editor.putString("seller", seller1);
-                        editor.commit();
                         Toast.makeText(getActivity(), "Register Success", Toast.LENGTH_LONG).show();
                         new UploadImage().execute();
                     }
@@ -237,8 +220,8 @@ public class SellerRegistration3 extends Fragment {
             if(progressDialog.isShowing())
                 progressDialog.dismiss();
             Toast.makeText(getActivity(), "Thank you.. For Registering Here...\n We are here for you 24/7....\nYour future has been bright here...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getActivity(), SellerActivity.class));
+            startActivity(new Intent(getActivity(), LogIn.class));
+            Toast.makeText(getActivity(), "Please Log In here", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

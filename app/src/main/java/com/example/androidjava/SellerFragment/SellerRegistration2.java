@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Patterns;
@@ -27,6 +28,8 @@ import androidx.fragment.app.Fragment;
 
 import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
+import com.example.androidjava.DatabaseConnection.JsonParse;
+import com.example.androidjava.DriverFragment.DriverRegistration2;
 import com.example.androidjava.GoogleMap;
 import com.example.androidjava.R;
 
@@ -155,31 +158,69 @@ public class SellerRegistration2 extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                } catch (IOException e) {
-                    Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-            strShopFrontImagebase64 = getStringImage(bitmap);
+                String path = null;
+                if (Build.VERSION.SDK_INT < 11)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
 
-            Uri uri = data.getData();
-            File file = new File(uri.getPath());
-            edtShopFrontImage.setText(file.getName());
+
+                else if (Build.VERSION.SDK_INT < 19)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
+
+
+                else
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
+
+                File file = new File(path);
+                long size = file.length() / 1024;
+
+                if (size < 400) {
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    strShopFrontImagebase64 = getStringImage(bitmap);
+                    String fileName= JsonParse.getFileName(data.getData(),getActivity());
+                    edtShopFrontImage.setText(fileName);
+                }else{
+                    Toast.makeText(getActivity(), "File size must be less than 400 Kb...", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         }
         if (requestCode == 2000 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                String path = null;
+                if (Build.VERSION.SDK_INT < 11)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_BelowAPI11(getActivity(), data.getData());
+
+                    // SDK >= 11 && SDK < 19
+                else if (Build.VERSION.SDK_INT < 19)
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API11to18(getActivity(), data.getData());
+
+                    // SDK > 19 (Android 4.4)
+                else
+                    path = DriverRegistration2.RealPathUtils.getRealPathFromURI_API19(getActivity(), data.getData());
+                // Get the file instance
+                File file = new File(path);
+                long size = file.length() / 1024;
+
+                if (size < 400) {
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    strShopInventoryImagebase64 = getStringImage(bitmap);
+                    String fileName= JsonParse.getFileName(data.getData(),getActivity());
+                    edtShopInventoryImage.setText(fileName);
+                }else{
+                    Toast.makeText(getActivity(), "File size must be less than 400 Kb...", Toast.LENGTH_SHORT).show();
                 }
+
             }
-            strShopInventoryImagebase64 = getStringImage(bitmap);
-            Uri uri = data.getData();
-            File file = new File(uri.getPath());
-            edtShopInventoryImage.setText(file.getName());
         }
     }
 

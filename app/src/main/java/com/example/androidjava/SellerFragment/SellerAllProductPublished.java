@@ -38,6 +38,7 @@ public class SellerAllProductPublished extends Fragment {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,9 +47,10 @@ public class SellerAllProductPublished extends Fragment {
         editor = sharedPreferences.edit();
         findViewById(view);
         productList = new ArrayList<>();
-        new PendingProductDisplay().execute();
+        SetRecycleView();
         return view;
     }
+
     private void findViewById(View view) {
         recyclerView = view.findViewById(R.id.recycle_published_product);
         recyclerView.setHasFixedSize(true);
@@ -85,22 +87,31 @@ public class SellerAllProductPublished extends Fragment {
             if (s.equals("") || s.startsWith("Error1:")) {
                 Toast.makeText(getActivity(), "Do not get any Response From database\nTry Again After Some Time" + s, Toast.LENGTH_LONG).show();
             } else {
-                JSONArray jsonArray = null;
-                try {
-                    editor.putString("product", s);
-                    editor.commit();
-                    jsonArray = new JSONArray(s);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        Gson gson = new Gson();
-                        mProduct product = gson.fromJson(jsonArray.getString(i), mProduct.class);
-                        if (product.getIsPublished().equals("1"))
-                            productList.add(product);
-                    }
-                    ProductAdapter productAdapter = new ProductAdapter(productList, getActivity());
-                    recyclerView.setAdapter(productAdapter);
-                } catch (JSONException e) {
-                    Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                editor.putString("publishedProduct",s);
+                editor.commit();
+                SetRecycleView();
+            }
+        }
+    }
+
+    private void SetRecycleView() {
+        String pendingProduct = sharedPreferences.getString("pendingProduct", "");
+        if (pendingProduct.equals("")) {
+            new PendingProductDisplay().execute();
+        } else {
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = new JSONArray(pendingProduct);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Gson gson = new Gson();
+                    mProduct product = gson.fromJson(jsonArray.getString(i), mProduct.class);
+                    if (product.getIsPublished().equals("0"))
+                        productList.add(product);
                 }
+                ProductAdapter productAdapter = new ProductAdapter(productList, getActivity());
+                recyclerView.setAdapter(productAdapter);
+            } catch (JSONException e) {
+                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }
