@@ -44,5 +44,7 @@ dependencies {
     implementation 'com.github.baoyachi:StepView:1.9'
     implementation 'com.karumi:dexter:5.0.0'
 
+    implementation 'com.journeyapps:zxing-android-embedded:4.0.2'
+
 
 }

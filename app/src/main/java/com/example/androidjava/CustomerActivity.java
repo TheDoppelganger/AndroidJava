@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -63,6 +65,8 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         editor = sharedPreferences.edit();
         mtoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         drawerLayout = findViewById(R.id.main_drawer_customer);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(toggle);
@@ -70,8 +74,8 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         gson = new Gson();
         String user = sharedPreferences.getString("user", null);
         muser = gson.fromJson(user, mUser.class);
-        ImageView imageView = findViewById(R.id.open_drawer);
-        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
+//        ImageView imageView = findViewById(R.id.open_drawer);
+//        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
         NavigationView navigationView = findViewById(R.id.main_nav_view_customer);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
@@ -178,12 +182,12 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.customer_menu_after_log_myaccount:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new SellerProfileCustomer()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new SellerProfileCustomer()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
 
             case R.id.customer_menu_after_log_mycart:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
 
@@ -192,23 +196,23 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_myfavourite:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_referearn:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerReferEarn()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerReferEarn()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_suggest_earn:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerSuggestEarn()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerSuggestEarn()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_job_for_jobless:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerJobForJobless()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerJobForJobless()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_order_history:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerOrderHistory()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerOrderHistory()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.customer_menu_after_log_out:
@@ -222,10 +226,44 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
+
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case R.id.location_customer_toolbar:
+                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+                    Intent io=new Intent(CustomerActivity.this,GoogleMap.class);
+                    String shop=sharedPreferences.getString("allShop","123");
+                    io.putExtra("Activity",shop);
+                    startActivity(io);
+                }
+                return true;
+
+            case R.id.fav:
+                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyFavourite()).addToBackStack(null).commit();
+                }
+                return true;
+
+            case R.id.cart:
+                if (CustomerActivity.class.getSimpleName().equals("CustomerActivity")) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_customer, new CustomerMyCart()).addToBackStack(null).commit();
+                }
+                return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
     @Override

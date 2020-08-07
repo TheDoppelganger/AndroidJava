@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -63,6 +66,8 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         editor = sharedPreferences.edit();
         mtoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         gson = new Gson();
         String seller1 = sharedPreferences.getString("seller", "");
         seller = gson.fromJson(seller1, mSeller.class);
@@ -73,17 +78,17 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        ImageView imageView = findViewById(R.id.open_drawer);
-        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
+//        ImageView imageView = findViewById(R.id.open_drawer);
+//        ImageView imageViewFav = findViewById(R.id.toolBar_menu_favouite);
         NavigationView navigationView = findViewById(R.id.main_nav_view_seller);
         View headerView=navigationView.getHeaderView(0);
         btnSwitchToCustoemer = headerView.findViewById(R.id.btn_switch_to_customer_account_customer_profile);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
         navigationView.setNavigationItemSelectedListener(this);
         toggleOpenClose = navigationView.getMenu().findItem(R.id.online_offfline_shop_status).getActionView().findViewById(R.id.toggle_menu_online_offline);
         toggleOpenClose.setTextOn("Open");
@@ -179,16 +184,16 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 startActivity(new Intent(SellerActivity.this, LogIn.class));
                 break;
             case R.id.menu_after_log_myproduct:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerAllProduct()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerAllProduct()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
 
             case R.id.menu_after_log_myorder:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerNewOrder()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerNewOrder()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_offline_billing:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerOfflineBilling()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_online_billing:
@@ -196,7 +201,7 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.menu_after_log_myearning:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerMyEarning()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerMyEarning()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.online_offfline_shop_status:
@@ -213,13 +218,21 @@ public class SellerActivity extends AppCompatActivity implements NavigationView.
                 }
                 break;
             case R.id.menu_after_log_shopprofile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerProfile()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_seller, new SellerProfile()).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
         return false;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+        Log.d("TAG", "onCreateOptionsMenu: working");
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

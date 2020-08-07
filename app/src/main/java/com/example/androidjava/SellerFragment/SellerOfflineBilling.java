@@ -1,12 +1,16 @@
 package com.example.androidjava.SellerFragment;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +20,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +39,8 @@ import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.R;
 import com.example.androidjava.SupportInterFace.AddRemoveFunction;
 import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -59,6 +68,7 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
     private List<mProduct> mainList;
     private RecyclerView recyleItem;
     private EditText edtCustomerName, edtCustomerAddress, edtCustomerMobile;
+    private ImageView btnBarcodeScan;
     private CheckBox chkNotCustomerDetails;
     private String shopId;
 
@@ -75,7 +85,7 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
 //        txtShopPhone.setText(seller.getShop_contact_number());
 //        txtShopAddress.setText(seller.getShop_pincode());
         shopId = seller.getId();
-        final String product = sharedPreferences.getString("product", null);
+        final String product = sharedPreferences.getString("publishedProduct", null);
         try {
             jsonArray = new JSONArray(product);
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -120,7 +130,29 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
                 alertDialog.show();
             }
         });
+
+        btnBarcodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
+                IntentIntegrator.forSupportFragment(SellerOfflineBilling.this).initiateScan();
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null){
+            if (intentResult.getContents() == null){
+                Toast.makeText(getContext(), "BarCode Scan Cancelled", Toast.LENGTH_SHORT).show();
+            }else {
+                edtBarcode.setText(intentResult.getContents());
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void findViewById(View view) {
@@ -130,6 +162,7 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
 //        txtShopEmail = view.findViewById(R.id.txt_shop_email_offline_billing);
         txtTotalAmount = view.findViewById(R.id.txt_total_amount_bill_offline_billing);
         edtBarcode = view.findViewById(R.id.edt_item_barcode_offline_billing);
+        btnBarcodeScan = view.findViewById(R.id.btnBarcodeScan);
         list = new ArrayList<>();
         sharedPreferences = getContext().getSharedPreferences("Database", MODE_PRIVATE);
         productName = new ArrayList<>();
