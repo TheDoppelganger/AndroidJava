@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,8 @@ import com.example.androidjava.R;
 import com.example.androidjava.SellerActivity;
 import com.example.androidjava.SupportInterFace.AdapterCallItemNumber;
 import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -60,7 +63,7 @@ import static com.example.androidjava.DatabaseConnection.JsonParse.getStringImag
 
 public class AddProduct extends Fragment implements AdapterCallItemNumber {
     private Button btnRequest, btnKgVarient, btnLiterVariant, btnOtherVariant;
-    private ImageView btnAddImage, imgAddImageToCamera;
+    private ImageView btnAddImage, imgAddImageToCamera, btnBarcodeScan;
     private EditText edtProductName, edtProductBarCode, edtMrp, edtPrice, edtShortDescription, edtDescription, edtOtherUnit,edtVariantSize,edtProductStock;
     private Spinner spnProductCategory;
     private RadioButton rbPacked, rbLoose, rbReturnable;
@@ -74,8 +77,8 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
     private List<mVarient> listVarient;
     private String proudctPacked, strRurnable = "Yes", strProductunit = "K.G.";
     private int CAMERA_REQUEST = 200;
-    private Switch switchFoodItemOrNot;
-    private RadioGroup rgFoodItemYes;
+//    private Switch switchFoodItemOrNot;
+//    private RadioGroup rgFoodItemYes;
     private AddProduct addProduct;
     private String variantImage;
     private int setVariantListNumber=0;
@@ -126,6 +129,15 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
                 }
             }
         });
+
+        btnBarcodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
+                IntentIntegrator.forSupportFragment(AddProduct.this).initiateScan();
+            }
+        });
+
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,16 +208,16 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
                 strProductunit="Other";
             }
         });
-        switchFoodItemOrNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                rgFoodItemYes.setVisibility(View.VISIBLE);
-                }else{
-                    rgFoodItemYes.setVisibility(View.GONE);
-                }
-            }
-        });
+//        switchFoodItemOrNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if(b){
+//                rgFoodItemYes.setVisibility(View.VISIBLE);
+//                }else{
+//                    rgFoodItemYes.setVisibility(View.GONE);
+//                }
+//            }
+//        });
         return view;
     }
 
@@ -224,6 +236,29 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("TAG", "onActivityResult: through rv");
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null){
+            if (intentResult.getContents() == null){
+                Toast.makeText(getContext(), "BarCode Scan Cancelled", Toast.LENGTH_SHORT).show();
+            }else {
+                edtProductBarCode.setText(intentResult.getContents());
+            }
+        }
+        if(requestCode ==1210 && resultCode == Activity.RESULT_OK){
+            IntentResult intentResultFromRV = IntentIntegrator.parseActivityResult(1210, resultCode, data);
+            if (intentResultFromRV != null){
+                if (intentResultFromRV.getContents() == null){
+                    Toast.makeText(getContext(), "BarCode Scan Cancelled", Toast.LENGTH_SHORT).show();
+                }else {
+//                    edtProductBarCode.setText(intentResultFromRV.getContents());
+                            Log.d("TAG", "");
+                    mVarient varient1=listVarient.get(setVariantListNumber);
+                    varient1.setProductBarCode(intentResultFromRV.getContents());
+                    addProductVarient.notifyDataSetChanged();
+                }
+            }
+        }
 
         if(requestCode ==5000 && resultCode == Activity.RESULT_OK){
             if (data != null) {
@@ -345,25 +380,26 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
         rbLoose = view.findViewById(R.id.rb_loose_add_product);
         edtMrp = view.findViewById(R.id.edt_mrp_add_product);
         edtPrice = view.findViewById(R.id.edt_price_add_product);
-        edtShortDescription = view.findViewById(R.id.edt_short_description_add_product);
-        edtDescription = view.findViewById(R.id.edt_description_add_product);
+//        edtShortDescription = view.findViewById(R.id.edt_short_description_add_product);
+//        edtDescription = view.findViewById(R.id.edt_description_add_product);
         btnAddImage = view.findViewById(R.id.btn_select_image_add_product);
         btnKgVarient = view.findViewById(R.id.btn_unit_kg_add_product);
         btnLiterVariant = view.findViewById(R.id.btn_unit_liter_add_product);
         btnOtherVariant = view.findViewById(R.id.btn_unit_other_add_product);
-
+        btnBarcodeScan= view.findViewById(R.id.btnBarcodeScan);
         linearCategory = view.findViewById(R.id.linear_unit_add_product);
         linearCategory.setVisibility(View.GONE);
         recycleVariant = view.findViewById(R.id.recycle_variant_add_product);
         recycleVariant.setHasFixedSize(true);
+
         recycleVariant.setLayoutManager(new LinearLayoutManager(getActivity()));
         imgVarient = view.findViewById(R.id.img_add_variant_add_product);
         listVarient = new ArrayList<>();
         rbReturnable = view.findViewById(R.id.rb_returnable_yes_add_product);
         imgAddImageToCamera = view.findViewById(R.id.btn_select_image_camera_add_product);
         edtOtherUnit=view.findViewById(R.id.edt_unit_other_add_product);
-        switchFoodItemOrNot=view.findViewById(R.id.switch_food_item_or_not_add_product);
-        rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
+//        switchFoodItemOrNot=view.findViewById(R.id.switch_food_item_or_not_add_product);
+//        rgFoodItemYes=view.findViewById(R.id.rg_food_item_yes_add_product);
         edtVariantSize=view.findViewById(R.id.edt_variant_size_add_product);
         edtProductStock=view.findViewById(R.id.edt_stock_add_product);
         addProduct=this;

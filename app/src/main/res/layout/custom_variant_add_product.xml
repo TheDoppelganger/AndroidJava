@@ -7,14 +7,15 @@
     <Button
         android:id="@+id/btn_cancel_varient_custom_add_product"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="end"
-        android:layout_margin="5dp"
-        android:background="@drawable/cancel_button"
-        android:padding="5dp"
+        android:background="@drawable/shapebutn"
+        android:backgroundTint="#FF0000"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:text="Cancel Variant"
         android:textAllCaps="false"
-        android:textColor="#ffffff" />
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/shape_edit_text"
             android:hint="Type Unit"
             android:padding="3dp"
             android:visibility="gone" />
@@ -101,61 +102,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@drawable/edit_text"
+        android:background="@drawable/shape_edit_text"
         android:hint="Enter Variant/Size Name"
         android:padding="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_margin="5dp"
         android:background="@android:color/transparent"
         android:orientation="horizontal"
-        android:weightSum="3">
+        >
 
         <TextView
             android:id="@+id/edt_choose_Image_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="2"
-            android:background="@drawable/edit_text"
-            android:padding="5dp"
-            android:text="Choose Image"
-            android:textColor="#000"
-            android:textSize="18dp" />
+            android:layout_margin="3dp"
+            android:layout_weight="6"
+            android:text="Upload Product Image"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/btn_select_image_varient_custom_add_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_baseline_attach_file_24" />
+            android:src="@drawable/ic_attachment_svgrepo_com" />
 
         <ImageView
             android:id="@+id/btn_select_image_camera_varient_custom_add_product"
             android:layout_width="0dp"
-            android:layout_height="21dp"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
             android:layout_weight="0.5"
-
             android:src="@drawable/ic_camera_alt_black_24dp" />
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edt_variant_barcode_custom_add_product"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@drawable/edit_text"
-        android:drawableRight="@drawable/barcode"
-        android:hint="Enter the barcode"
-        android:padding="5dp" />
+        android:background="@drawable/shape_edit_text"
+        android:padding="5dp">
+
+        <EditText
+            android:id="@+id/edt_variant_barcode_custom_add_product"            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:hint="Enter the Bar Code"
+            android:inputType="number" />
+
+        <ImageView
+            android:id="@+id/btnBarcodeScan"
+            android:layout_width="32dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_barcode_scan"
+            android:text="Button" />
+    </RelativeLayout>
+
 
 
     <LinearLayout
@@ -171,7 +183,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/shape_edit_text"
             android:hint="MRP"
             android:padding="5dp" />
 
@@ -181,7 +193,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="3dp"
             android:layout_weight="2"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/shape_edit_text"
             android:hint="Price"
             android:padding="5dp" />
     </LinearLayout>
@@ -191,7 +203,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@drawable/edit_text"
+        android:background="@drawable/shape_edit_text"
         android:hint="Enter opening stock"
         android:padding="5dp" />
 

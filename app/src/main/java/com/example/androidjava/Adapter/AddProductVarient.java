@@ -30,6 +30,7 @@ import com.example.androidjava.DriverFragment.DriverRegistration2;
 import com.example.androidjava.Model.mVarient;
 import com.example.androidjava.R;
 import com.example.androidjava.SellerFragment.AddProduct;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
     public void onBindViewHolder(@NonNull final AddProductVarientViewHolde holder, final int position) {
         final mVarient varient = listProduct.get(position);
         holder.txtImgName.setText(varient.getProductvariantImageName());
+        holder.edtBarCode.setText(varient.getProductBarCode());
         holder.btnCancelVariant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,6 +216,15 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
                 }
             }
         });
+
+        holder.btnBarcodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
+                IntentIntegrator intentIntegrator = new IntentIntegrator(activity);
+                intentIntegrator.setRequestCode(1210).initiateScan();
+            }
+        });
     }
 
     @Override
@@ -226,7 +237,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
         RadioButton rbPacked;
         LinearLayout linearUnitChoose;
         Button btnKgUnit, btnLiterUnit, btnOtherUnit, btnCancelVariant;
-        ImageView imgOpenGallery, imgOpenCamera;
+        ImageView imgOpenGallery, imgOpenCamera,btnBarcodeScan;
         TextView txtImgName;
         public AddProductVarientViewHolde(@NonNull View itemView) {
             super(itemView);
@@ -245,6 +256,7 @@ public class AddProductVarient extends RecyclerView.Adapter<AddProductVarient.Ad
             imgOpenCamera = itemView.findViewById(R.id.btn_select_image_camera_varient_custom_add_product);
             imgOpenGallery = itemView.findViewById(R.id.btn_select_image_varient_custom_add_product);
             txtImgName=itemView.findViewById(R.id.edt_choose_Image_custom_add_product);
+            btnBarcodeScan=itemView.findViewById(R.id.btnBarcodeScan);
         }
 
     }
