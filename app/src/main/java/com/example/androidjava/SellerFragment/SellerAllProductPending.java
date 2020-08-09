@@ -1,16 +1,23 @@
 package com.example.androidjava.SellerFragment;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +29,8 @@ import com.example.androidjava.Model.mProduct;
 import com.example.androidjava.Model.mSeller;
 import com.example.androidjava.R;
 import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -38,7 +47,8 @@ public class SellerAllProductPending extends Fragment {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private RecyclerView recyclerView;
-
+    private AutoCompleteTextView edtBarcode;
+    private ImageView btnBarcodeScan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,11 +59,36 @@ public class SellerAllProductPending extends Fragment {
         findViewById(view);
         productList = new ArrayList<>();
         SetRecycleView();
+        btnBarcodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
+                IntentIntegrator.forSupportFragment(SellerAllProductPending.this).initiateScan();
+            }
+        });
+
         return view;
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null){
+            if (intentResult.getContents() == null){
+                Toast.makeText(getContext(), "BarCode Scan Cancelled", Toast.LENGTH_SHORT).show();
+            }else {
+                edtBarcode.setText(intentResult.getContents());
+            }
+        }
+
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     private void findViewById(View view) {
         recyclerView = view.findViewById(R.id.recycle_pending_product);
+        edtBarcode = view.findViewById(R.id.edt_item_barcode_product_pending);
+        btnBarcodeScan = view.findViewById(R.id.btnBarcodeScan_product_pending);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

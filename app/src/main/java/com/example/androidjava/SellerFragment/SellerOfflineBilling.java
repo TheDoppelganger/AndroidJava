@@ -62,13 +62,14 @@ public class SellerOfflineBilling extends Fragment implements AddRemoveFunction 
     private List<mProduct> list;
     private TextView txtShopName, txtShopAddress, txtShopPhone, txtShopEmail, txtTotalAmount;
     private AutoCompleteTextView edtBarcode;
+    private ImageView btnBarcodeScan;
     private mSeller seller;
     private JSONArray jsonArray;
     private List<String> productName, productId;
     private List<mProduct> mainList;
     private RecyclerView recyleItem;
     private EditText edtCustomerName, edtCustomerAddress, edtCustomerMobile;
-    private ImageView btnBarcodeScan;
+
     private CheckBox chkNotCustomerDetails;
     private String shopId;
 

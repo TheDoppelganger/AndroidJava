@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -72,7 +73,7 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
     private String strProductImage = "";
     private SharedPreferences sharedPreferences;
     private RecyclerView recycleVariant;
-    private LinearLayout linearCategory;
+    private LinearLayout linearCategory,parentLayout;
     private Button imgVarient;
     private List<mVarient> listVarient;
     private String proudctPacked, strRurnable = "Yes", strProductunit = "K.G.";
@@ -89,6 +90,7 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
         View view = inflater.inflate(R.layout.fragment_add_product, container, false);
         sharedPreferences = getContext().getSharedPreferences("Database", MODE_PRIVATE);
         findViewById(view);
+
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -173,6 +175,8 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
                     listVarient.add(varient);
                     addProductVarient = new AddProductVarient(listVarient, getActivity(),addProduct);
                     recycleVariant.setAdapter(addProductVarient);
+                    parentLayout.invalidate();
+
                 } else {
                     Toast.makeText(getActivity(), "You Can Add 5 Varient Under One Product", Toast.LENGTH_LONG).show();
                 }
@@ -388,10 +392,12 @@ public class AddProduct extends Fragment implements AdapterCallItemNumber {
         btnOtherVariant = view.findViewById(R.id.btn_unit_other_add_product);
         btnBarcodeScan= view.findViewById(R.id.btnBarcodeScan);
         linearCategory = view.findViewById(R.id.linear_unit_add_product);
+
+        parentLayout = view.findViewById(R.id.parentLayout);
+
         linearCategory.setVisibility(View.GONE);
         recycleVariant = view.findViewById(R.id.recycle_variant_add_product);
         recycleVariant.setHasFixedSize(true);
-
         recycleVariant.setLayoutManager(new LinearLayoutManager(getActivity()));
         imgVarient = view.findViewById(R.id.img_add_variant_add_product);
         listVarient = new ArrayList<>();

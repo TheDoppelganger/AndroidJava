@@ -20,91 +20,113 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:weightSum="2">
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/shape_edit_text"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <RadioGroup
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_variant_packed_custom_add_product"
+            <EditText
+                android:id="@+id/edt_variant_size_custom_add_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="7"
+                android:background="@null"
+                android:hint="Enter Variant/Size Name" />
+
+            <RadioGroup
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="Packed" />
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_loose_add_product"
+                <RadioButton
+                    android:id="@+id/rb_variant_packed_custom_add_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Packed"
+                    android:padding="3dp"
+
+                    android:background="@drawable/radio_flat_selector"
+                    android:button="@android:color/transparent"
+                    android:textColor="@color/radio_flat_text_selector"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rb_loose_add_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loose"
+                    android:padding="3dp"
+                    android:background="@drawable/radio_flat_selector"
+                    android:button="@android:color/transparent"
+                    android:textColor="@color/radio_flat_text_selector"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_unit_add_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="5">
+
+            <Button
+                android:id="@+id/btn_variant_kg_unit_custom_add_product"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="Loose" />
+                android:background="@drawable/button"
+                android:text="K.G."
+                android:textAllCaps="false" />
 
-        </RadioGroup>
+            <Button
+                android:id="@+id/btn_variant_liter_unit_custom_add_product"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button1"
+                android:text="Liter"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_variant_other_unit_custom_add_product"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button1"
+                android:text="Other"
+                android:textAllCaps="false" />
+
+            <EditText
+                android:id="@+id/edt_variant_other_unit_custom_add_product"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/shape_edit_text"
+                android:hint="Type Unit"
+                android:padding="3dp"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_unit_add_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:weightSum="5">
 
-        <Button
-            android:id="@+id/btn_variant_kg_unit_custom_add_product"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button"
-            android:text="K.G."
-            android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btn_variant_liter_unit_custom_add_product"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button1"
-            android:text="Liter"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/btn_variant_other_unit_custom_add_product"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button1"
-            android:text="Other"
-            android:textAllCaps="false" />
-
-        <EditText
-            android:id="@+id/edt_variant_other_unit_custom_add_product"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@drawable/shape_edit_text"
-            android:hint="Type Unit"
-            android:padding="3dp"
-            android:visibility="gone" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/edt_variant_size_custom_add_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/shape_edit_text"
-        android:hint="Enter Variant/Size Name"
-        android:padding="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
